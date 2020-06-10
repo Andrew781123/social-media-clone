@@ -1,0 +1,9 @@
+POST http://localhost:5000/api/posts
+Content-Type: application/json
+
+{
+    "user": {
+        "username": "Andrew"
+    },
+    "content": "A post hahaha"
+}
