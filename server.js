@@ -6,6 +6,8 @@ const app = express();
 // database
 require("./database")();
 
+app.use(express.json());
+
 //routes
 const userRouter = require("./routes/user");
 app.use("/api/users", userRouter);

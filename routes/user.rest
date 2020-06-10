@@ -1,0 +1,7 @@
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+{
+    "username": "Andrew",
+    "started": "Wed Jun 10 2020 19:26:04 GMT+0800 (Hong Kong Standard Time)"
+}
