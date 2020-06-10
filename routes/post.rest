@@ -1,3 +1,7 @@
+GET http://localhost:5000/api/posts
+
+###
+
 POST http://localhost:5000/api/posts
 Content-Type: application/json
 
@@ -7,3 +11,15 @@ Content-Type: application/json
     },
     "content": "A post hahaha"
 }
+
+###
+
+PATCH http://localhost:5000/api/posts/5ee0d0654d442f0578a8ba73
+Content-Type: application/json
+
+{
+    "content": "updated a post"
+}
+###
+DELETE http://localhost:5000/api/posts/5ee0ce03c9fdf8553057cf4a
+
