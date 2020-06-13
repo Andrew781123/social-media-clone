@@ -1,7 +1,7 @@
 const initialState = {
   isAuth: null,
   loading: null,
-  user: null
+  user: { username: null }
 };
 
 const authReducer = (state = initialState, action) => {

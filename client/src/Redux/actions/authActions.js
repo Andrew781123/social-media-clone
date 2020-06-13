@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const loadUser = () => async dispatch => {
-  console.log("loadUser");
   try {
     dispatch({ type: "SET_LOADING" });
     const res = await axios.get("/api/auth");

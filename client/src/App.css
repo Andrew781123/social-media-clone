@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -81,4 +83,92 @@ nav ul li {
   margin-bottom: 0.5em;
   border-bottom: 0.1em solid rgba(170, 170, 170, 0.726);
   padding-bottom: 0.2em;
+}
+
+/* Posts */
+
+.post-form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  margin-top: 1em;
+}
+
+.post-form-container > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.post-form-container select {
+  width: 90%;
+  height: 30px;
+}
+
+.post-form-container button {
+  width: 10%;
+  background-color: rgb(175, 21, 21);
+  color: white;
+  border: none;
+  height: 30px;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.post-form-container button:hover {
+  cursor: pointer;
+  background-color: rgb(129, 15, 15);
+}
+
+.welcome-container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(9, 78, 9, 0.685);
+  padding: 0.5em;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+}
+
+.welcome-container > .welcome-message {
+  margin-left: 1em;
+  color: white;
+  font-size: 1.2em;
+}
+
+.welcome-container > .welcome-message .username {
+  font-weight: 700;
+}
+
+/* user */
+
+.icon {
+  width: 3.2em;
+  height: 3.2em;
+  background-color: grey;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.head,
+.body {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.head {
+  width: 40%;
+  height: 40%;
+  background-color: white;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.body {
+  width: 100%;
+  height: 50%;
+  background-color: yellow;
+  top: 60%;
 }
