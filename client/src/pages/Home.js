@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { loadUser } from "../Redux/actions/authActions";
 import PostForm from "../components/posts/PostForm";
+import Posts from "../components/posts/Posts";
 
 const Home = ({ auth }) => {
   const { isAuth } = auth;
@@ -9,6 +10,7 @@ const Home = ({ auth }) => {
   return (
     <div className='container'>
       <PostForm />
+      <Posts />
     </div>
   );
 };
