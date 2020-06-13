@@ -14,14 +14,15 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { user, content } = req.body;
+  const { username, content, isPublic } = req.body;
 
   try {
     const newPost = new Post({
-      user,
-      content
+      username,
+      content,
+      isPublic
     });
-    const author = await User.findOne({ username: user.username });
+    const author = await User.findOne({ username });
     const savedPost = await newPost.save();
     //push new post to user
     author.posts.push(savedPost);

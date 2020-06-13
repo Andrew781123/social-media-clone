@@ -101,12 +101,12 @@ nav ul li {
 }
 
 .post-form-container select {
-  width: 90%;
+  width: 80%;
   height: 30px;
 }
 
 .post-form-container button {
-  width: 10%;
+  width: 20%;
   background-color: rgb(175, 21, 21);
   color: white;
   border: none;
@@ -169,6 +169,6 @@ nav ul li {
 .body {
   width: 100%;
   height: 50%;
-  background-color: yellow;
+  background-color: rgb(61, 179, 248);
   top: 60%;
 }

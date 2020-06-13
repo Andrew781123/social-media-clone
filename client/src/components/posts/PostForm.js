@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import UserIcon from "../user/UserIcon";
+import { createPost } from "../../Redux/actions/postActions";
 
-const PostForm = ({ auth }) => {
+const PostForm = ({ auth, createPost }) => {
   const {
     user: { username }
   } = auth;
 
   const [post, setPost] = useState({
     content: "",
-    type: true
+    type: "Public"
   });
 
   const handleChange = e => {
@@ -18,6 +19,11 @@ const PostForm = ({ auth }) => {
 
   const handleSelect = e => {
     setPost({ ...post, type: e.target.value });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    createPost(post, username);
   };
 
   return (
@@ -30,7 +36,7 @@ const PostForm = ({ auth }) => {
           </span>
         </div>
       </div>
-      <form className=''>
+      <form onSubmit={handleSubmit}>
         <textarea
           name='content'
           value={post.content}
@@ -55,4 +61,8 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(PostForm);
+const mapDispatchToProps = dispatch => ({
+  createPost: (post, username) => dispatch(createPost(post, username))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm);

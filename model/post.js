@@ -5,10 +5,19 @@ const likeSchema = require("./like");
 const moment = require("moment");
 
 const postSchema = new mongoose.Schema({
-  user: userBasicSchema,
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
 
   content: {
     type: String,
+    required: true
+  },
+
+  isPublic: {
+    type: Boolean,
     required: true
   },
 
