@@ -26,7 +26,7 @@ const Navbar = ({ auth }) => {
               <span className='logged-in-user'>
                 Logged in as {user.username}
               </span>
-              <a onClick={handleLogout}>Logout</a>
+              <button onClick={handleLogout}>Logout</button>
             </li>
           ) : (
             loading === false &&

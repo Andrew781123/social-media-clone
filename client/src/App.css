@@ -15,7 +15,7 @@
 
 header {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   background-color: rgb(53, 53, 53);
   color: white;
@@ -55,6 +55,14 @@ nav ul li {
 
 .logged-in-user ~ a:hover {
   cursor: pointer;
+}
+
+.login-out > button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-weight: 400;
+  font-size: 1em;
 }
 
 .login-container {
