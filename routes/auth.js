@@ -25,4 +25,9 @@ router.get("/login/success", authroizeUser, (req, res) => {
   res.status(200).json({ user: req.user });
 });
 
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("http://localhost:3000/auth/login");
+});
+
 module.exports = router;
