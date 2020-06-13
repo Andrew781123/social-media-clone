@@ -10,24 +10,44 @@ const Navbar = ({ auth }) => {
   const { loading, isAuth, user } = auth;
 
   return (
-    <nav>
-      <ul>
-        {!loading && !isAuth && (
+    <header>
+      <h1>Snooker Community</h1>
+
+      <nav>
+        <ul>
           <li>
-            <button>
-              <Link to='/auth/login'>Login</Link>
-            </button>
+            <Link to='/' style={navLinksStyle}>
+              Home
+            </Link>
           </li>
-        )}
-        {!loading && isAuth && (
-          <li>
-            <button onClick={handleLogout}>Logout</button>
-            <span>Logged in as {user.username}</span>
-          </li>
-        )}
-      </ul>
-    </nav>
+
+          {!loading && isAuth ? (
+            <li className='login-out'>
+              <span className='logged-in-user'>
+                Logged in as {user.username}
+              </span>
+              <a onClick={handleLogout}>Logout</a>
+            </li>
+          ) : (
+            loading === false &&
+            isAuth === false && (
+              <li className='login-out'>
+                <Link to='/auth/login' style={navLinksStyle}>
+                  Login
+                </Link>
+              </li>
+            )
+          )}
+        </ul>
+      </nav>
+    </header>
   );
+};
+
+const navLinksStyle = {
+  color: "white",
+  textDecoration: "none",
+  fontSize: "1em"
 };
 
 const mapStateToProps = state => ({

@@ -1,6 +1,6 @@
 const initialState = {
-  isAuth: false,
-  loading: false,
+  isAuth: null,
+  loading: null,
   user: null
 };
 
@@ -11,6 +11,13 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuth: true,
         user: action.payload,
+        loading: false
+      };
+    }
+    case "LOAD_USER_FAIL": {
+      return {
+        ...state,
+        isAuth: false,
         loading: false
       };
     }

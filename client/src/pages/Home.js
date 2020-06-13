@@ -3,14 +3,10 @@ import { connect } from "react-redux";
 import { loadUser } from "../Redux/actions/authActions";
 
 const Home = ({ auth, loadUser }) => {
-  const { isAuth } = auth;
-
-  useEffect(() => {
-    loadUser();
-  }, []);
+  const { isAuth, user } = auth;
 
   return (
-    <div>
+    <div className='container'>
       <h1>Home Page</h1>
       {isAuth && <h3>LoggedIn</h3>}
     </div>

@@ -1,38 +1,76 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Balsamiq Sans", cursive;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background-color: rgb(53, 53, 53);
+  color: white;
+  min-height: 50px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+header h1 {
+  padding-left: 10px;
+}
+
+nav {
+  margin-left: 30px;
+  flex-grow: 1;
+}
+
+nav ul {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+}
+
+nav ul li {
+  list-style-type: none;
+  text-decoration: none;
+  color: white;
+}
+
+.login-out {
+  margin-left: auto;
+  margin-right: 30px;
+}
+
+.logged-in-user {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.logged-in-user ~ a:hover {
+  cursor: pointer;
+}
+
+.login-container {
+  width: 60%;
+  margin: auto;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-container > h2 {
+  width: 55%;
+  text-align: center;
+  margin-bottom: 0.5em;
+  border-bottom: 0.1em solid rgba(170, 170, 170, 0.726);
+  padding-bottom: 0.2em;
 }
