@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getPost = () => async dispatch => {
-  dispatch({ type: "SET_LOADING" });
+  dispatch({ type: "SET_POST_LOADING" });
   try {
     const res = await axios({
       method: "GET",
@@ -15,7 +15,7 @@ export const getPost = () => async dispatch => {
 };
 
 export const createPost = (post, username) => async dispatch => {
-  dispatch({ type: "SET_LOADING" });
+  dispatch({ type: "SET_POST_LOADING" });
   const { content, type } = post;
   let isPublic;
   if (type === "public") isPublic = true;

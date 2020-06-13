@@ -3,7 +3,10 @@ const userBasicSchema = require("./userBasic");
 const likeSchema = require("./like");
 
 const commentSchema = new mongoose.Schema({
-  user: userBasicSchema,
+  username: {
+    type: String,
+    required: true
+  },
 
   content: {
     type: String,

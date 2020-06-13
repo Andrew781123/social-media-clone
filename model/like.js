@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const userBasicSchema = require("./userBasic");
 
 const likeSchema = new mongoose.Schema({
-  user: userBasicSchema,
+  username: {
+    type: String,
+    required: true
+  },
 
   likes: {
     type: Number,
