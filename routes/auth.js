@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const authroizeUser = require("../middleware/auth");
 
-router.get("/", (req, res) => {
+router.get("/", authroizeUser, (req, res) => {
   if (req.user) return res.status(200).json({ user: req.user });
 });
 
@@ -20,7 +21,7 @@ router.get(
   })
 );
 
-router.get("/login/success", (req, res) => {
+router.get("/login/success", authroizeUser, (req, res) => {
   res.status(200).json({ user: req.user });
 });
 
