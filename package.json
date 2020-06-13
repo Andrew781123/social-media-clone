@@ -13,17 +13,24 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
+    "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "moment": "^2.26.0",
     "mongoose": "^5.9.18",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "react-router-dom": "^5.2.0"
+    "react-google-button": "^0.7.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",
-    "nodemon": "^2.0.4",
-    "typescript": "^3.9.5"
+    "nodemon": "^2.0.4"
   }
 }

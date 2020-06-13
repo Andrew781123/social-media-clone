@@ -13,6 +13,11 @@ const userDetailSchema = new mongoose.Schema({
     unique: true
   },
 
+  googleId: {
+    type: String,
+    required: true
+  },
+
   started: {
     type: Date,
     required: true,
