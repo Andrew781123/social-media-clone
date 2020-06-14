@@ -9,6 +9,19 @@
   font-family: "Balsamiq Sans", cursive;
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-weight: 400;
+  font-size: 1em;
+  /* padding: 0.5em; */
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
 .container {
   width: 100%;
   max-width: 1000px;
@@ -59,14 +72,6 @@ nav ul li {
   cursor: pointer;
 }
 
-.login-out > button {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-weight: 400;
-  font-size: 1em;
-}
-
 .login-container {
   width: 60%;
   margin: auto;
@@ -86,6 +91,11 @@ nav ul li {
 }
 
 /* Posts */
+
+.posts-container {
+  width: 60%;
+  margin: auto;
+}
 
 .post-form-container {
   width: 100%;
@@ -171,4 +181,57 @@ nav ul li {
   height: 50%;
   background-color: rgb(61, 179, 248);
   top: 60%;
+}
+
+/* postItem */
+
+.post-item-container {
+  width: 100%;
+  background-color: rgba(228, 228, 228, 0.356);
+  margin-top: 1em;
+  padding: 0.35em;
+  border-radius: 0.7em;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.3em;
+  border-bottom: 0.1em solid rgba(82, 82, 82, 0.664);
+}
+
+.username-and-time {
+  margin-left: 1em;
+  display: inline-block;
+}
+
+.post-item-container > p {
+  min-height: 4em;
+  margin-top: 0.5em;
+}
+
+.post-item-data {
+  color: rgb(141, 141, 141);
+}
+
+.buttons > button {
+  width: 15%;
+  padding: 0.4em;
+  font-weight: 500;
+  border-radius: 0.4em;
+}
+
+.buttons > .like-button {
+  background-color: white;
+  color: rgb(247, 4, 207);
+}
+
+.buttons > .like-button.liked {
+  background-color: rgba(247, 4, 207, 0.486);
+  color: white;
+}
+
+.buttons > .comment-button {
+  background-color: rgba(33, 150, 245, 0.699);
+  margin-left: 0.5em;
 }

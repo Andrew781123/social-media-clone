@@ -12,7 +12,7 @@ const Posts = ({ post, getPost }) => {
   }, []);
 
   return (
-    <div>
+    <div className='posts-container'>
       {loading === false ? (
         posts.map(post => <PostItem key={post._id.toString()} post={post} />)
       ) : (
