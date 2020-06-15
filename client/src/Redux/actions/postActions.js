@@ -78,16 +78,15 @@ export const decLike = (currentUserId, postId) => async dispatch => {
   }
 };
 
-export const getComments = postId => async dispatch => {
+export const getComments = (postId, commentNum) => async dispatch => {
   try {
     const res = await axios({
       method: "GET",
-      url: `/api/posts/${postId}/comments`,
+      url: `/api/posts/${postId}/comments?num=${commentNum}`,
       headers: {
         "Content-Type": "application/json"
       }
     });
-    console.log(res.data);
     dispatch({ type: "GET_COMMENTS", payload: res.data[0].recentComments });
   } catch (err) {
     console.error(err);

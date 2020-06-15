@@ -103,10 +103,15 @@ router.post("/:id/likes/decrement", async (req, res) => {
 
 router.get("/:id/comments", async (req, res) => {
   try {
+    console.log(req.query.num);
     const _id = mongoose.Types.ObjectId(req.params.id);
     const comments = await Post.aggregate([
       { $match: { _id: _id } },
-      { $project: { recentComments: { $slice: ["$comments", -3] } } }
+      {
+        $project: {
+          recentComments: { $slice: ["$comments", -1 * req.query.num] }
+        }
+      }
     ]);
 
     res.status(200).json(comments);
@@ -133,22 +138,6 @@ router.post("/:id/comments", async (req, res) => {
     console.error(err);
     res.status(500).json({ message: "Server Error" });
   }
-});
-
-router.get("/test", async (req, res) => {
-  const id = "5ee740d3bd0ab325b4e9cfd0";
-  const _id = mongoose.Types.ObjectId(id);
-
-  // const comments = await Post.findById("5ee740d3bd0ab325b4e9cfd0", {
-  //   comments: { $slice: 3 }
-  // });
-  // .populate("comments")
-  // .select({ comments: 1 })
-  // .limit(3)
-  // .exec();
-
-  console.log(comments);
-  res.send(comments);
 });
 
 module.exports = router;

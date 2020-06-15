@@ -244,17 +244,31 @@ nav ul li {
 
 /* comment  */
 
+.show-comments {
+}
+
+.show-comments:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: rgba(33, 150, 245, 0.699);
+}
+
 .post-comment {
   margin-top: 0.7rem;
 }
 
 .post-comment-input {
-  height: 1rem;
-  padding: 0.8rem 0.5rem;
+  padding: 0.3rem 0.5rem;
   width: 80%;
+  margin-top: 0.4rem;
+  font-size: 1.1rem;
 }
 
 .comment-item-container {
+  background-color: rgba(192, 192, 192, 0.61);
+  padding: 0.6rem;
+  margin-top: 0.4rem;
+  border-radius: 1rem;
 }
 
 .comment-item-user-info {

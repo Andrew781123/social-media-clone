@@ -57,6 +57,7 @@ const PostItem = ({
           comments={comments}
           getComments={getComments}
           postId={post._id.toString()}
+          commentCount={post.commentCount}
         />
         <PostCommentForm
           addComment={addComment}
