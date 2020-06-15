@@ -14,8 +14,10 @@ const PostComments = ({ comments, getComments, postId, commentCount }) => {
 
   const handleClick = async () => {
     getComments(postId, commentNum + 5);
-    if (commentCount <= commentNum + 5) setIsMoreComments(false);
-    if (commentCount <= commentNum + 5) setCommentNum(num => num + 5);
+    if (commentCount <= commentNum + 5) {
+      setIsMoreComments(false);
+      setCommentNum(num => num + 5);
+    }
   };
 
   return (

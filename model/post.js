@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 const commentSchema = require("./comment");
-const userBasicSchema = require("./userBasic");
-const likeSchema = require("./like");
 const moment = require("moment");
 
 const postSchema = new mongoose.Schema(

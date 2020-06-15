@@ -211,7 +211,7 @@ nav ul li {
 }
 
 .post-item-container > p {
-  min-height: 4em;
+  min-height: 5em;
   margin-top: 0.5em;
 }
 
@@ -219,27 +219,31 @@ nav ul li {
   color: rgb(141, 141, 141);
 }
 
-.buttons > button {
+.like-button-and-count {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  padding-bottom: 0.5rem;
+  border-bottom: 0.1em solid rgba(82, 82, 82, 0.664);
+}
+
+.like-button-and-count > button {
   width: 15%;
   padding: 0.4em;
   font-weight: 500;
   border-radius: 0.4em;
 }
 
-.buttons > .like-button {
+.like-button-and-count > .like-button {
   background-color: white;
   color: rgb(247, 4, 207);
   transition: all 0.2s;
+  margin-right: 0.5rem;
 }
 
-.buttons > .like-button.liked {
+.like-button-and-count > .like-button.liked {
   background-color: rgba(247, 4, 207, 0.486);
   color: white;
-}
-
-.buttons > .comment-button {
-  background-color: rgba(33, 150, 245, 0.699);
-  margin-left: 0.5em;
 }
 
 /* comment  */

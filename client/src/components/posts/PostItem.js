@@ -43,14 +43,17 @@ const PostItem = ({
         </div>
       </div>
       <p>{post.content}</p>
-      <div className='buttons'>
+      <div className='like-button-and-count'>
         <button
           className={`like-button ${isLiked && "liked"}`}
           onClick={handleLike}
         >
           Like
         </button>
-        <button className='comment-button'>Comment</button>
+        <small className='like-count'>
+          {post.likeCount} {post.likeCount === 1 ? "person" : "people"} like
+          this post
+        </small>
       </div>
       <div className='post-comment'>
         <PostComments
