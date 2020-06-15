@@ -23,6 +23,11 @@ const userDetailSchema = new mongoose.Schema({
     get: getExperience
   },
 
+  isFirst: {
+    type: Boolean,
+    default: true
+  },
+
   posts: [
     {
       type: mongoose.Schema.Types.ObjectId

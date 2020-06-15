@@ -2,22 +2,22 @@ import React, { useEffect, useState } from "react";
 import PostCommentItem from "./PostCommentItem";
 
 const PostComments = ({ comments, getComments, postId, commentCount }) => {
-  const [commentNum, setCommentNum] = useState(3);
+  const [commentShown, setcommentShown] = useState(3);
   const [isMoreComments, setIsMoreComments] = useState(null);
 
   useEffect(() => {
-    getComments(postId, commentNum);
-    if (commentCount <= commentNum) setIsMoreComments(false);
+    getComments(postId, commentShown);
+    if (commentCount <= commentShown) setIsMoreComments(false);
     else setIsMoreComments(true);
     // eslint-disable-next-line
   }, []);
 
   const handleClick = async () => {
-    getComments(postId, commentNum + 5);
-    if (commentCount <= commentNum + 5) {
+    getComments(postId, commentShown + 5);
+    if (commentCount <= commentShown + 5) {
       setIsMoreComments(false);
-      setCommentNum(num => num + 5);
     }
+    setcommentShown(num => num + 5);
   };
 
   return (

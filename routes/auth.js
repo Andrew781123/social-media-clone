@@ -14,12 +14,12 @@ router.get(
   })
 );
 
-router.get(
-  "/google/redirect",
-  passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/auth/login/success"
-  })
-);
+router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
+  console.log(req.user.isFirst);
+  if (req.user.isFirst) {
+    res.redirect("http://localhost:3000/newUser");
+  } else res.redirect("http://localhost:3000/");
+});
 
 router.get("/login/success", authroizeUser, (req, res) => {
   res.status(200).json({ user: req.user });

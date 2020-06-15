@@ -188,6 +188,48 @@ nav ul li {
   top: 60%;
 }
 
+.new-user-form-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.new-user-form-container > form {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.new-user-form-container > form > h1 {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.1em solid rgba(82, 82, 82, 0.664);
+}
+
+.new-user-form-container > form > .form-input > label,
+.new-user-form-container > form > .form-input > input {
+  font-size: 1.5rem;
+}
+
+.new-user-form-container > form > .form-input {
+  margin-top: 1rem;
+  align-self: flex-start;
+}
+
+.new-user-form-container > form > button {
+  color: black;
+  font-size: 1.3rem;
+  background-color: rgb(15, 255, 15);
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
 /* postItem */
 
 .post-item-container {

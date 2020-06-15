@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import Navbar from "./layout/Navbar";
 import Login from "./auth/Login";
+import NewUser from "./components/user/NewUser";
 import PrivateRoute from "./PrivateRoute";
 import LoginSuccess from "./auth/LoginSuccess";
 import { Provider } from "react-redux";
@@ -28,6 +29,7 @@ const App = () => {
             someWord={"hello"}
           />
           <Route exact path='/auth/login/success' component={LoginSuccess} />
+          <Route exact path='/newUser' component={NewUser} />
         </Switch>
       </Router>
     </Provider>

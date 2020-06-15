@@ -13,7 +13,11 @@ passport.use(
       const { id, displayName } = profile;
 
       const user = await User.findOne({ googleId: id });
-      if (user) return done(null, user);
+      if (user) {
+        user.isFirst = true;
+        await user.save();
+        return done(null, user);
+      }
 
       const newUser = new User({
         username: displayName,

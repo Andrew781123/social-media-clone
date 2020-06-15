@@ -103,7 +103,6 @@ router.post("/:id/likes/decrement", async (req, res) => {
 
 router.get("/:id/comments", async (req, res) => {
   try {
-    console.log(req.query.num);
     const _id = mongoose.Types.ObjectId(req.params.id);
     const comments = await Post.aggregate([
       { $match: { _id: _id } },
