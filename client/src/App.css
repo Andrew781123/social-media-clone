@@ -241,3 +241,15 @@ nav ul li {
   background-color: rgba(33, 150, 245, 0.699);
   margin-left: 0.5em;
 }
+
+/* comment  */
+
+.post-comment {
+  margin-top: 0.7rem;
+}
+
+.post-comment-input {
+  height: 1rem;
+  padding: 0.8rem 0.5rem;
+  width: 80%;
+}

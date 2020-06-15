@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UserIcon from "../user/UserIcon";
+import PostCommentForm from "./PostCommentForm";
 
 const PostItem = ({ post, currentUserId, incLike, decLike }) => {
   const [isLiked, setIsLiked] = useState(null);
@@ -39,6 +40,9 @@ const PostItem = ({ post, currentUserId, incLike, decLike }) => {
           Like
         </button>
         <button className='comment-button'>Comment</button>
+      </div>
+      <div className='post-comment'>
+        <PostCommentForm />
       </div>
     </div>
   );
