@@ -1,5 +1,6 @@
 const initialState = {
   posts: [],
+  comments: [],
   loading: null
 };
 
@@ -43,6 +44,18 @@ const postReducer = (state = initialState, action) => {
             return action.payload;
           else return post;
         })
+      };
+    }
+    case "GET_COMMENTS": {
+      return {
+        ...state,
+        comments: action.payload
+      };
+    }
+    case "ADD_COMMENT": {
+      return {
+        ...state,
+        comments: [...state.comments, action.payload]
       };
     }
     default:

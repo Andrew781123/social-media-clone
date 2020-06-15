@@ -77,3 +77,39 @@ export const decLike = (currentUserId, postId) => async dispatch => {
     console.error(err);
   }
 };
+
+export const getComments = postId => async dispatch => {
+  try {
+    const res = await axios({
+      method: "GET",
+      url: `/api/posts/${postId}/comments`,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    dispatch({ type: "GET_COMMENTS", payload: res.data.comments });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const addComment = (username, postId, comment) => async dispatch => {
+  try {
+    const res = await axios({
+      method: "POST",
+      url: `/api/posts/${postId}/comments`,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        username,
+        content: comment
+      }
+    });
+
+    dispatch({ type: "ADD_COMMENT", payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};

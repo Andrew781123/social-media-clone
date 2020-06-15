@@ -1,13 +1,26 @@
 import React, { useEffect } from "react";
 import PostItem from "./PostItem";
 import { connect } from "react-redux";
-import { getPost, incLike, decLike } from "../../Redux/actions/postActions";
+import {
+  getPost,
+  incLike,
+  decLike,
+  addComment,
+  getComments
+} from "../../Redux/actions/postActions";
 
-const Posts = ({ post, auth, getPost, incLike, decLike }) => {
-  const { posts, loading } = post;
-  const {
-    user: { _id }
-  } = auth;
+const Posts = ({
+  post,
+  auth,
+  getPost,
+  incLike,
+  decLike,
+  addComment,
+  getComments
+}) => {
+  const { posts, loading, comments } = post;
+  const { user } = auth;
+  const { _id } = user;
 
   useEffect(() => {
     getPost();
@@ -24,6 +37,10 @@ const Posts = ({ post, auth, getPost, incLike, decLike }) => {
             currentUserId={_id.toString()}
             incLike={incLike}
             decLike={decLike}
+            addComment={addComment}
+            currentUsername={user.username}
+            comments={comments}
+            getComments={getComments}
           />
         ))
       ) : (
@@ -41,7 +58,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getPost: () => dispatch(getPost()),
   incLike: (currentUserId, postId) => dispatch(incLike(currentUserId, postId)),
-  decLike: (currentUserId, postId) => dispatch(decLike(currentUserId, postId))
+  decLike: (currentUserId, postId) => dispatch(decLike(currentUserId, postId)),
+  addComment: (username, postId, comment) =>
+    dispatch(addComment(username, postId, comment)),
+  getComments: postId => dispatch(getComments(postId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
