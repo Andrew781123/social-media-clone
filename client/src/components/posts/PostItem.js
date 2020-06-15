@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import UserIcon from "../user/UserIcon";
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, currentUserId, incLike, decLike }) => {
+  const [isLiked, setIsLiked] = useState(null);
+
+  useEffect(() => {
+    let liked = false;
+    for (let _id of post.likes) {
+      if (_id.toString() === currentUserId) {
+        liked = true;
+        break;
+      }
+    }
+    if (liked) setIsLiked(true);
+    else setIsLiked(false);
+  }, [post]);
+
+  const handleLike = () => {
+    if (isLiked === true) decLike(currentUserId, post._id.toString());
+    else incLike(currentUserId, post._id.toString());
+  };
+
   return (
     <div className='post-item-container'>
       <div className='user-info'>
@@ -13,7 +32,12 @@ const PostItem = ({ post }) => {
       </div>
       <p>{post.content}</p>
       <div className='buttons'>
-        <button className='like-button'>Like</button>
+        <button
+          className={`like-button ${isLiked && "liked"}`}
+          onClick={handleLike}
+        >
+          Like
+        </button>
         <button className='comment-button'>Comment</button>
       </div>
     </div>

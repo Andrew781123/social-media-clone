@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import PostItem from "./PostItem";
 import { connect } from "react-redux";
-import { getPost } from "../../Redux/actions/postActions";
+import { getPost, incLike, decLike } from "../../Redux/actions/postActions";
 
-const Posts = ({ post, getPost }) => {
+const Posts = ({ post, auth, getPost, incLike, decLike }) => {
   const { posts, loading } = post;
-  if (posts.length > 0) console.log(posts[0]);
+  const {
+    user: { _id }
+  } = auth;
 
   useEffect(() => {
     getPost();
@@ -14,7 +16,15 @@ const Posts = ({ post, getPost }) => {
   return (
     <div className='posts-container'>
       {loading === false ? (
-        posts.map(post => <PostItem key={post._id.toString()} post={post} />)
+        posts.map(post => (
+          <PostItem
+            key={post._id.toString()}
+            post={post}
+            currentUserId={_id.toString()}
+            incLike={incLike}
+            decLike={decLike}
+          />
+        ))
       ) : (
         <h2>Loading...</h2>
       )}
@@ -23,11 +33,14 @@ const Posts = ({ post, getPost }) => {
 };
 
 const mapStateToProps = state => ({
-  post: state.post
+  post: state.post,
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({
-  getPost: () => dispatch(getPost())
+  getPost: () => dispatch(getPost()),
+  incLike: (currentUserId, postId) => dispatch(incLike(currentUserId, postId)),
+  decLike: (currentUserId, postId) => dispatch(decLike(currentUserId, postId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

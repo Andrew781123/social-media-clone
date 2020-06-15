@@ -25,6 +25,26 @@ const postReducer = (state = initialState, action) => {
         loading: true
       };
     }
+    case "INC_LIKE": {
+      return {
+        ...state,
+        posts: state.posts.map(post => {
+          if (post._id.toString() === action.payload._id.toString())
+            return action.payload;
+          else return post;
+        })
+      };
+    }
+    case "DEC_LIKE": {
+      return {
+        ...state,
+        posts: state.posts.map(post => {
+          if (post._id.toString() === action.payload._id.toString())
+            return action.payload;
+          else return post;
+        })
+      };
+    }
     default:
       return state;
   }

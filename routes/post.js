@@ -68,4 +68,35 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.post("/:id/likes/increment", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    const user = await User.findById(req.body.userId);
+
+    post.likes.push(user._id);
+    const savedPost = await post.save();
+    res.status(201).json(savedPost);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
+router.post("/:id/likes/decrement", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    const user = await User.findById(req.body.userId);
+
+    const newLikes = post.likes.filter(
+      _id => _id.toString() !== user._id.toString()
+    );
+    post.likes = newLikes;
+    const savedPost = await post.save();
+    res.status(201).json(savedPost);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 module.exports = router;

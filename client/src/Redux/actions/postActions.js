@@ -40,3 +40,40 @@ export const createPost = (post, username) => async dispatch => {
     console.error(err);
   }
 };
+
+export const incLike = (currentUserId, postId) => async dispatch => {
+  try {
+    const res = await axios({
+      method: "POST",
+      url: `/api/posts/${postId}/likes/increment`,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        userId: currentUserId
+      }
+    });
+    dispatch({ type: "INC_LIKE", payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const decLike = (currentUserId, postId) => async dispatch => {
+  try {
+    const res = await axios({
+      method: "POST",
+      url: `/api/posts/${postId}/likes/decrement`,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        userId: currentUserId
+      }
+    });
+
+    dispatch({ type: "DEC_LIKE", payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
