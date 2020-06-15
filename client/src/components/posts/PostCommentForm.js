@@ -9,6 +9,7 @@ const PostCommentForm = ({ addComment, postId, currentUsername }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setInput("");
     addComment(currentUsername, postId, input);
   };
 

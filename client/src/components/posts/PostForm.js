@@ -23,6 +23,10 @@ const PostForm = ({ auth, createPost }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setPost({
+      content: "",
+      type: "Public"
+    });
     createPost(post, username);
   };
 
@@ -32,7 +36,7 @@ const PostForm = ({ auth, createPost }) => {
         <UserIcon />
         <div className='welcome-message'>
           <span className='welcome'>
-            Welcome Back <span className='username'>Andrew</span>
+            Welcome Back <span className='username'>{username}</span>
           </span>
         </div>
       </div>

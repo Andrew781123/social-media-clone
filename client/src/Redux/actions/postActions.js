@@ -87,8 +87,8 @@ export const getComments = postId => async dispatch => {
         "Content-Type": "application/json"
       }
     });
-
-    dispatch({ type: "GET_COMMENTS", payload: res.data.comments });
+    console.log(res.data);
+    dispatch({ type: "GET_COMMENTS", payload: res.data[0].recentComments });
   } catch (err) {
     console.error(err);
   }
