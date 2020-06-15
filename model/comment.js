@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const userBasicSchema = require("./userBasic");
 const likeSchema = require("./like");
+const moment = require("moment");
 
 const commentSchema = new mongoose.Schema({
   username: {
@@ -11,6 +12,13 @@ const commentSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true
+  },
+
+  createdAt: {
+    type: String,
+    default: () => {
+      return moment(Date.now()).format("DD MMM");
+    }
   },
 
   likes: [likeSchema]

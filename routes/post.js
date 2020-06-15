@@ -121,6 +121,8 @@ router.post("/:id/comments", async (req, res) => {
     };
     post.comments.push(newComment);
     const savedPost = await post.save();
+
+    // get the newly pushed comment
     const savedComment = savedPost.comments[savedPost.comments.length - 1];
     res.status(201).json(savedComment);
   } catch (err) {

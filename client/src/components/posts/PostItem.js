@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import UserIcon from "../user/UserIcon";
 import PostCommentForm from "./PostCommentForm";
 import PostComments from "./PostComments";
+import CreatedTime from "./CreatedTime";
 
 const PostItem = ({
   post,
@@ -35,10 +36,10 @@ const PostItem = ({
   return (
     <div className='post-item-container'>
       <div className='user-info'>
-        <UserIcon />
+        <UserIcon size='3.2em' />
         <div className='username-and-time'>
           <p className='post-item-username'>{post.username}</p>
-          <p className='post-item-data'>{post.createdAt}</p>
+          <CreatedTime createdAt={post.createdAt} />
         </div>
       </div>
       <p>{post.content}</p>

@@ -1,8 +1,10 @@
 import React from "react";
 
-const UserIcon = () => {
+const UserIcon = props => {
+  const { size } = props;
+
   return (
-    <div className='icon'>
+    <div className='icon' style={{ width: size, height: size }}>
       <div className='head'></div>
       <div className='body'></div>
     </div>
