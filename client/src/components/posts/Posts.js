@@ -11,6 +11,7 @@ const Posts = ({ post, auth, getPost, incLike, decLike }) => {
 
   useEffect(() => {
     getPost();
+    //  eslint-disable-next-line
   }, []);
 
   return (

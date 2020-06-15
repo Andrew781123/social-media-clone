@@ -14,7 +14,7 @@ const PostItem = ({ post, currentUserId, incLike, decLike }) => {
     }
     if (liked) setIsLiked(true);
     else setIsLiked(false);
-  }, [post]);
+  }, [post, currentUserId]);
 
   const handleLike = () => {
     if (isLiked === true) decLike(currentUserId, post._id.toString());
@@ -26,8 +26,8 @@ const PostItem = ({ post, currentUserId, incLike, decLike }) => {
       <div className='user-info'>
         <UserIcon />
         <div className='username-and-time'>
-          <p className='post-item-username'>Andrew</p>
-          <p className='post-item-data'>8 Jan</p>
+          <p className='post-item-username'>{post.username}</p>
+          <p className='post-item-data'>{post.createdAt}</p>
         </div>
       </div>
       <p>{post.content}</p>

@@ -4,41 +4,38 @@ const userBasicSchema = require("./userBasic");
 const likeSchema = require("./like");
 const moment = require("moment");
 
-const postSchema = new mongoose.Schema(
-  {
-    username: {
-      type: String,
-      required: true
-    },
-
-    content: {
-      type: String,
-      required: true
-    },
-
-    isPublic: {
-      type: Boolean,
-      required: true
-    },
-
-    createdAt: {
-      type: Date,
-      default: () => {
-        return moment(new Date()).format("DD MMM");
-      }
-    },
-
-    likes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "userDetail"
-      }
-    ],
-
-    comments: [commentSchema]
+const postSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true
   },
-  { toObject: { depopulate: true } }
-);
+
+  content: {
+    type: String,
+    required: true
+  },
+
+  isPublic: {
+    type: Boolean,
+    required: true
+  },
+
+  createdAt: {
+    type: String,
+    default: () => {
+      return moment(Date.now()).format("DD MMM");
+    }
+  },
+
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "userDetail"
+    }
+  ],
+
+  comments: [commentSchema]
+});
 
 postSchema.virtual("likeCount").get(function () {
   return this.likes.length;

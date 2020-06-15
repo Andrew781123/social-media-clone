@@ -4,7 +4,6 @@ const passport = require("passport");
 const authroizeUser = require("../middleware/auth");
 
 router.get("/", authroizeUser, (req, res) => {
-  console.log(req.user);
   if (req.user) return res.status(200).json({ user: req.user });
 });
 

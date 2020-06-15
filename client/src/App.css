@@ -18,7 +18,7 @@ button {
   /* padding: 0.5em; */
 }
 
-.button:hover {
+button:hover {
   cursor: pointer;
 }
 
@@ -48,7 +48,7 @@ nav {
 
 nav ul {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   width: 100%;
 }
 
@@ -102,6 +102,11 @@ nav ul li {
   max-width: 600px;
   margin: auto;
   margin-top: 1em;
+}
+
+.post-form-container textarea {
+  resize: none;
+  height: 6rem;
 }
 
 .post-form-container > form {
@@ -224,6 +229,7 @@ nav ul li {
 .buttons > .like-button {
   background-color: white;
   color: rgb(247, 4, 207);
+  transition: all 0.2s;
 }
 
 .buttons > .like-button.liked {

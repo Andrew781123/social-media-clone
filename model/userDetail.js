@@ -9,8 +9,7 @@ function getExperience(started) {
 const userDetailSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
 
   googleId: {
