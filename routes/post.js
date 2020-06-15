@@ -114,14 +114,15 @@ router.get("/:id/comments", async (req, res) => {
 
 router.post("/:id/comments", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).select("comments");
     const newComment = {
       username: req.body.username,
       content: req.body.content
     };
     post.comments.push(newComment);
-    await post.save();
-    res.status(201).json(newComment);
+    const savedPost = await post.save();
+    const savedComment = savedPost.comments[savedPost.comments.length - 1];
+    res.status(201).json(savedComment);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });

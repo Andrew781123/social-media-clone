@@ -107,7 +107,6 @@ export const addComment = (username, postId, comment) => async dispatch => {
         content: comment
       }
     });
-
     dispatch({ type: "ADD_COMMENT", payload: res.data });
   } catch (err) {
     console.error(err);
