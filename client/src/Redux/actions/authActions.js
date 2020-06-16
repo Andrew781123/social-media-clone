@@ -10,3 +10,18 @@ export const loadUser = () => async dispatch => {
     console.error(err);
   }
 };
+
+export const updateHeadColor = headColor => {
+  console.log(headColor);
+  return {
+    type: "UPDATE_HEAD_COLOR",
+    payload: headColor
+  };
+};
+
+export const updateBodyColor = bodyColor => {
+  return {
+    type: "UPDATE_BODY_COLOR",
+    payload: bodyColor
+  };
+};

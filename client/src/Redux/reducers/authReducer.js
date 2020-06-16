@@ -1,7 +1,7 @@
 const initialState = {
   isAuth: null,
   loading: null,
-  user: { username: null }
+  user: { username: null, headColor: "white", bodyColor: "blue" }
 };
 
 const authReducer = (state = initialState, action) => {
@@ -25,6 +25,18 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      };
+    }
+    case "UPDATE_BODY_COLOR": {
+      return {
+        ...state,
+        user: { ...state.user, bodyColor: action.payload }
+      };
+    }
+    case "UPDATE_HEAD_COLOR": {
+      return {
+        ...state,
+        user: { ...state.user, headColor: action.payload }
       };
     }
     default:

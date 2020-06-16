@@ -22,20 +22,24 @@ const NewUser = props => {
     <div className='new-user-form-container'>
       <form onSubmit={handleSubmit}>
         <h1>Welcome</h1>
-        <div className='form-input'>
-          <label htmlFor='username'>Username: </label>
-          <input
-            type='text'
-            name='username'
-            value={newUser.username}
-            onChange={handleChange}
-          />
-        </div>
-        <button type='submit'>Next</button>
         <div className='edit-user-icon'>
-          <UserIcon size={"10rem"} />
+          <UserIcon
+            size={"10rem"}
+            headColor={user.headColor}
+            bodyColor={user.bodyColor}
+          />
+          <div className='form-input'>
+            <label htmlFor='username'>Username: </label>
+            <input
+              type='text'
+              name='username'
+              value={newUser.username}
+              onChange={handleChange}
+            />
+          </div>
           <Customize />
         </div>
+        <button type='submit'>Next</button>
       </form>
     </div>
   );

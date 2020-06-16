@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 
 const ColorItem = props => {
-  const { part, color } = props;
+  const { part, color, updateColor } = props;
 
   const [height, setHeight] = useState("0");
 
@@ -21,6 +21,7 @@ const ColorItem = props => {
       ref={colorItem}
       className={`color ${part}-color`}
       style={{ backgroundColor: color, height: height }}
+      onClick={() => updateColor(color)}
     ></div>
   );
 };
