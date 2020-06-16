@@ -195,7 +195,8 @@ nav ul li {
 }
 
 .new-user-form-container > form {
-  width: 50%;
+  width: 95%;
+  max-width: 600px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -334,3 +335,52 @@ nav ul li {
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
 }
+
+/* newUser  */
+
+.edit-user-icon {
+  width: 95%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-options-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-options-container > .head-container,
+.color-options-container > .body-container {
+  width: 100%;
+  text-align: center;
+}
+
+.head-container > .head-colors,
+.body-container > .body-colors {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 16%);
+  grid-column-gap: 5%;
+  grid-row-gap: 1rem;
+}
+
+.color:hover {
+  cursor: pointer;
+}
+
+.head-container > h1,
+.body-container > h1 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 0.1em solid rgba(82, 82, 82, 0.664);
+  padding-top: 0.5rem;
+}
+
+/* .color {
+  height: 53.9667px;
+} */

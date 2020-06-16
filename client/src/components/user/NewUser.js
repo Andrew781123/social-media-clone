@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import UserIcon from "./UserIcon";
+import Customize from "./Customize";
 
 const NewUser = props => {
   const { user } = props;
@@ -30,6 +32,10 @@ const NewUser = props => {
           />
         </div>
         <button type='submit'>Next</button>
+        <div className='edit-user-icon'>
+          <UserIcon size={"10rem"} />
+          <Customize />
+        </div>
       </form>
     </div>
   );
