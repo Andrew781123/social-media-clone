@@ -1,6 +1,5 @@
 const initialState = {
-  posts: [],
-  comments: [],
+  posts: [{ comments: [] }],
   loading: null
 };
 
@@ -49,13 +48,24 @@ const postReducer = (state = initialState, action) => {
     case "GET_COMMENTS": {
       return {
         ...state,
-        comments: action.payload
+        posts: state.posts.map(post => {
+          if (post._id.toString() === action.payload.postId)
+            return { ...post, comments: action.payload.comments };
+          else return post;
+        })
       };
     }
     case "ADD_COMMENT": {
       return {
         ...state,
-        comments: [...state.comments, action.payload]
+        posts: state.posts.map(post => {
+          if (post._id.toString() === action.payload.postId)
+            return {
+              ...post,
+              comments: [...post.comments, action.payload.comment]
+            };
+          else return post;
+        })
       };
     }
     default:

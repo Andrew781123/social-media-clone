@@ -10,7 +10,7 @@ const PostItem = ({
   incLike,
   decLike,
   addComment,
-  currentUsername,
+  user,
   comments,
   getComments
 }) => {
@@ -65,11 +65,12 @@ const PostItem = ({
           getComments={getComments}
           postId={post._id.toString()}
           commentCount={post.commentCount}
+          post={post}
         />
         <PostCommentForm
           addComment={addComment}
           postId={post._id.toString()}
-          currentUsername={currentUsername}
+          user={user}
         />
       </div>
     </div>

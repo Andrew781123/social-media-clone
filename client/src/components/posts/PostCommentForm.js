@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PostCommentForm = ({ addComment, postId, currentUsername }) => {
+const PostCommentForm = ({ addComment, postId, user }) => {
   const [input, setInput] = useState("");
 
   const handleChange = e => {
@@ -10,7 +10,8 @@ const PostCommentForm = ({ addComment, postId, currentUsername }) => {
   const handleSubmit = e => {
     e.preventDefault();
     setInput("");
-    addComment(currentUsername, postId, input);
+
+    addComment(user, postId, input);
   };
 
   return (

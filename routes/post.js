@@ -112,7 +112,6 @@ router.get("/:id/comments", async (req, res) => {
         }
       }
     ]);
-
     res.status(200).json(comments);
   } catch (err) {
     console.error(err);
@@ -124,7 +123,7 @@ router.post("/:id/comments", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id).select("comments");
     const newComment = {
-      username: req.body.username,
+      user: req.body.user,
       content: req.body.content
     };
     post.comments.push(newComment);

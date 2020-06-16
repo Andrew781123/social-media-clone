@@ -6,18 +6,30 @@ import {
   updateBodyColor
 } from "../../Redux/actions/authActions";
 
-const headColors = [
+const colors = [
+  "#000000",
+  "#ffffff",
   "#fc032c",
   "#3c00ff",
   "#00bd39",
+  "#b1fc0f",
   "#f2ff00",
   "#00ffb7",
+  "#e1c9f0",
+  "#1c5391",
+  "#1e6648",
   "#00ffb7",
-  "#00ffb7",
-  "#00ffb7",
-  "#00ffb7"
+  "#facfe5",
+  "#00e5ff",
+  "#14fff7",
+  "#ffbf00",
+  "#599977",
+  "#75482e",
+  "#75482e"
 ];
-const bodyColors = ["#fa00c0", "#00e5ff", "#ffbf00"];
+
+const headColors = colors;
+const bodyColors = colors;
 
 const Customize = props => {
   const { updateHeadColor, updateBodyColor } = props;

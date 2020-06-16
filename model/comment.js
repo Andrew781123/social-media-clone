@@ -2,12 +2,10 @@ const mongoose = require("mongoose");
 const userBasicSchema = require("./userBasic");
 const likeSchema = require("./like");
 const moment = require("moment");
+const { userSchema } = require("./userDetail");
 
 const commentSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true
-  },
+  user: userSchema,
 
   content: {
     type: String,

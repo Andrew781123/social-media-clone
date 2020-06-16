@@ -3,16 +3,20 @@ import UserIcon from "../user/UserIcon";
 import CreatedTime from "./CreatedTime";
 
 const PostCommentItem = ({ comment }) => {
-  const { username, content } = comment;
+  // const { comment } = comment;
 
   return (
     <div className='comment-item-container'>
       <div className='comment-item-user-info'>
-        <UserIcon size='1.7em' headColor={"white"} bodyColor={"blue"} />
-        <span className='comment-item-username'>{username}</span>
+        <UserIcon
+          size='1.7em'
+          headColor={comment.user.headColor}
+          bodyColor={comment.user.bodyColor}
+        />
+        <span className='comment-item-username'>{comment.user.username}</span>
         <CreatedTime createdAt={comment.createdAt} />
       </div>
-      <p className='comment-item-content'>{content}</p>
+      <p className='comment-item-content'>{comment.content}</p>
     </div>
   );
 };

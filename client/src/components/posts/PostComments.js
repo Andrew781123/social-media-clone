@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import PostCommentItem from "./PostCommentItem";
 
-const PostComments = ({ comments, getComments, postId, commentCount }) => {
+const PostComments = ({ getComments, postId, commentCount, post }) => {
+  const { comments } = post;
+
   const [commentShown, setcommentShown] = useState(3);
   const [isMoreComments, setIsMoreComments] = useState(null);
 
   useEffect(() => {
+    console.log(postId);
+    console.log("get comment");
     getComments(postId, commentShown);
     if (commentCount <= commentShown) setIsMoreComments(false);
     else setIsMoreComments(true);

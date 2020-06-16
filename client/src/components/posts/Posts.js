@@ -38,7 +38,7 @@ const Posts = ({
             incLike={incLike}
             decLike={decLike}
             addComment={addComment}
-            currentUsername={user.username}
+            user={user}
             comments={comments}
             getComments={getComments}
           />

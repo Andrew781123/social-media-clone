@@ -87,13 +87,16 @@ export const getComments = (postId, commentNum) => async dispatch => {
         "Content-Type": "application/json"
       }
     });
-    dispatch({ type: "GET_COMMENTS", payload: res.data[0].recentComments });
+    dispatch({
+      type: "GET_COMMENTS",
+      payload: { comments: res.data[0].recentComments, postId }
+    });
   } catch (err) {
     console.error(err);
   }
 };
 
-export const addComment = (username, postId, comment) => async dispatch => {
+export const addComment = (user, postId, comment) => async dispatch => {
   try {
     const res = await axios({
       method: "POST",
@@ -102,11 +105,11 @@ export const addComment = (username, postId, comment) => async dispatch => {
         "Content-Type": "application/json"
       },
       data: {
-        username,
+        user,
         content: comment
       }
     });
-    dispatch({ type: "ADD_COMMENT", payload: res.data });
+    dispatch({ type: "ADD_COMMENT", payload: { comment: res.data, postId } });
   } catch (err) {
     console.error(err);
   }
