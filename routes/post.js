@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Post = require("../model/post");
-const User = require("../model/userDetail");
+const { User } = require("../model/userDetail");
 const { Mongoose } = require("mongoose");
 
 router.get("/", async (req, res) => {
@@ -16,15 +16,15 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { username, content, isPublic } = req.body;
+  const { user, content, isPublic } = req.body;
 
   try {
     const newPost = new Post({
-      username,
+      user,
       content,
       isPublic
     });
-    const author = await User.findOne({ username });
+    const author = await User.findOne({ username: user.username });
     const savedPost = await newPost.save();
     //push new post to user
     author.posts.push(savedPost);

@@ -8,7 +8,7 @@ const PostCommentItem = ({ comment }) => {
   return (
     <div className='comment-item-container'>
       <div className='comment-item-user-info'>
-        <UserIcon size='1.7em' />
+        <UserIcon size='1.7em' headColor={"white"} bodyColor={"blue"} />
         <span className='comment-item-username'>{username}</span>
         <CreatedTime createdAt={comment.createdAt} />
       </div>

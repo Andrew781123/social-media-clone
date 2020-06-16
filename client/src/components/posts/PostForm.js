@@ -4,9 +4,7 @@ import UserIcon from "../user/UserIcon";
 import { createPost } from "../../Redux/actions/postActions";
 
 const PostForm = ({ auth, createPost }) => {
-  const {
-    user: { username }
-  } = auth;
+  const { user } = auth;
 
   const [post, setPost] = useState({
     content: "",
@@ -27,7 +25,7 @@ const PostForm = ({ auth, createPost }) => {
       content: "",
       type: "Public"
     });
-    createPost(post, username);
+    createPost(post, user);
   };
 
   return (
@@ -36,7 +34,7 @@ const PostForm = ({ auth, createPost }) => {
         <UserIcon />
         <div className='welcome-message'>
           <span className='welcome'>
-            Welcome Back <span className='username'>{username}</span>
+            Welcome Back <span className='username'>{user.username}</span>
           </span>
         </div>
       </div>

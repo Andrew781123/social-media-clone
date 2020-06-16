@@ -25,3 +25,21 @@ export const updateBodyColor = bodyColor => {
     payload: bodyColor
   };
 };
+
+export const updateUser = user => async dispatch => {
+  try {
+    dispatch({ type: "SET_LOADING" });
+    const res = await axios({
+      method: "PATCH",
+      url: `/api/users/${user.userId}`,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: user
+    });
+
+    dispatch({ type: "UPDATE_USER", payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};

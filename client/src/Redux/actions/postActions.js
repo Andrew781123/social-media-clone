@@ -14,7 +14,7 @@ export const getPost = () => async dispatch => {
   }
 };
 
-export const createPost = (post, username) => async dispatch => {
+export const createPost = (post, user) => async dispatch => {
   dispatch({ type: "SET_POST_LOADING" });
   const { content, type } = post;
   let isPublic;
@@ -29,7 +29,7 @@ export const createPost = (post, username) => async dispatch => {
         "Content-Type": "application/json"
       },
       data: {
-        username,
+        user,
         content,
         isPublic
       }

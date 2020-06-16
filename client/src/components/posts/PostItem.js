@@ -36,9 +36,13 @@ const PostItem = ({
   return (
     <div className='post-item-container'>
       <div className='user-info'>
-        <UserIcon size='3.2em' />
+        <UserIcon
+          size='3.2em'
+          headColor={post.user.headColor}
+          bodyColor={post.user.bodyColor}
+        />
         <div className='username-and-time'>
-          <p className='post-item-username'>{post.username}</p>
+          <p className='post-item-username'>{post.user.username}</p>
           <CreatedTime createdAt={post.createdAt} />
         </div>
       </div>

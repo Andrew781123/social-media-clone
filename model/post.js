@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
 const commentSchema = require("./comment");
 const moment = require("moment");
+const { userSchema } = require("./userDetail");
 
 const postSchema = new mongoose.Schema(
   {
-    username: {
-      type: String,
-      required: true
-    },
+    user: userSchema,
 
     content: {
       type: String,

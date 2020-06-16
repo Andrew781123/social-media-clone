@@ -12,6 +12,16 @@ const userDetailSchema = new mongoose.Schema({
     required: true
   },
 
+  headColor: {
+    type: String,
+    default: "white"
+  },
+
+  bodyColor: {
+    type: String,
+    default: "blue"
+  },
+
   googleId: {
     type: String,
     required: true
@@ -35,4 +45,6 @@ const userDetailSchema = new mongoose.Schema({
   ]
 });
 
-module.exports = mongoose.model("userDetail", userDetailSchema);
+module.exports.userSchema = userDetailSchema;
+
+module.exports.User = mongoose.model("userDetail", userDetailSchema);
