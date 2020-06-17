@@ -43,10 +43,13 @@ const PostForm = ({ auth, createPost }) => {
           name='content'
           value={post.content}
           onChange={handleChange}
-          placeholder='Write somethins to share'
+          placeholder='Write somethings to share'
         ></textarea>
         <div>
           <select name='isPublic' onChange={handleSelect}>
+            <option value='meaningless'>
+              為了看起來多一點功能而存在的選項
+            </option>
             <option value='public'>Public</option>
             <option value='private'>Private</option>
           </select>

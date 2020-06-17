@@ -13,6 +13,8 @@
   --primary-color: rgb(255, 255, 255);
   --secondary-color: rgb(153, 153, 153);
   --secondery-background-color: rgb(91, 91, 91);
+  --border: 0.1em solid rgba(133, 133, 133, 0.699);
+  --hover-color: rgb(68, 171, 255);
 }
 
 body {
@@ -56,21 +58,27 @@ nav {
   flex-grow: 1;
 }
 
-nav ul {
+nav > ul {
   display: flex;
+  align-items: center;
   justify-content: flex-start;
   width: 100%;
 }
 
-nav ul li {
+nav > ul > li {
   list-style-type: none;
   text-decoration: none;
   color: white;
 }
 
+.nav-user.icon {
+  margin-right: 3rem;
+}
+
 .login-out {
   margin-left: auto;
-  margin-right: 30px;
+  margin-right: 2rem;
+  position: relative;
 }
 
 .logged-in-user {
@@ -93,10 +101,11 @@ nav ul li {
 }
 
 .login-container > h2 {
+  color: var(--primary-color);
   width: 55%;
   text-align: center;
   margin-bottom: 0.5em;
-  border-bottom: 0.1em solid rgba(170, 170, 170, 0.726);
+  border-bottom: var(--border);
   padding-bottom: 0.2em;
 }
 
@@ -183,6 +192,10 @@ nav ul li {
   display: inline-block;
 }
 
+.icon:hover {
+  cursor: pointer;
+}
+
 .head,
 .body {
   position: absolute;
@@ -224,14 +237,24 @@ nav ul li {
 
 .new-user-form-container > form > h1 {
   width: 100%;
+  color: var(--primary-color);
   text-align: center;
   padding-bottom: 0.5rem;
-  border-bottom: 0.1em solid rgba(82, 82, 82, 0.664);
+  border-bottom: var(--border);
 }
 
 .new-user-form-container > form > .edit-user-icon > .form-input > label,
 .new-user-form-container > form > .edit-user-icon > .form-input > input {
+  color: var(--primary-color);
   font-size: 1.5rem;
+}
+
+.edit-user-icon .form-input input {
+  border: none;
+  margin-left: 0.4rem;
+  padding: 0.1rem;
+  padding-left: 0.3rem;
+  background-color: var(--secondery-background-color);
 }
 
 .new-user-form-container > form > .edit-user-icon > .form-input {
@@ -247,6 +270,36 @@ nav ul li {
   padding: 0.6rem;
   border-radius: 0.5rem;
   margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.user-icon-dropdown {
+  position: absolute;
+  right: 0rem;
+  top: 3rem;
+  background-color: var(--secondery-background-color);
+}
+
+.user-icon-dropdown .dropdown-links {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem;
+}
+
+.user-icon-dropdown .dropdown-link {
+  color: var(--primary-color);
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.user-icon-dropdown .dropdown-link:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.user-icon-dropdown .dropdown-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--hover-color);
 }
 
 /* postItem */
@@ -263,7 +316,7 @@ nav ul li {
   display: flex;
   align-items: center;
   padding-bottom: 0.3em;
-  border-bottom: 0.1em solid rgba(82, 82, 82, 0.664);
+  border-bottom: var(--border);
 }
 
 .username-and-time {
@@ -290,7 +343,7 @@ nav ul li {
   flex-direction: column;
   /* align-items: center; */
   padding-bottom: 0.5rem;
-  border-bottom: 0.1em solid rgba(82, 82, 82, 0.664);
+  border-bottom: var(--border);
 }
 
 .like-button-and-count > button {
@@ -325,7 +378,7 @@ nav ul li {
 .show-comments:hover {
   cursor: pointer;
   text-decoration: underline;
-  color: rgb(68, 171, 255);
+  color: var(--hover-color);
 }
 
 .post-comment {
@@ -409,9 +462,10 @@ nav ul li {
 
 .head-container > h1,
 .body-container > h1 {
+  color: var(--primary-color);
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  border-bottom: 0.1em solid rgba(82, 82, 82, 0.664);
+  border-bottom: var(--border);
   padding-top: 0.5rem;
 }
 

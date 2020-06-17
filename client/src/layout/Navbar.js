@@ -1,17 +1,25 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import UserIcon from "../components/user/UserIcon";
+import UserIconDropdown from "../components/user/UserIconDropdown";
 
 const handleLogout = () => {
   window.open("http://localhost:5000/api/auth/logout", "_self");
 };
 
+const handleUserIconClick = (showDropdown, setShowDropdown) => {
+  setShowDropdown(!showDropdown);
+};
+
 const Navbar = ({ auth }) => {
   const { loading, isAuth, user } = auth;
 
+  const [showDropdown, setShowDropdown] = useState(false);
+
   return (
     <header>
-      <h1>Snooker Community</h1>
+      <h1>Fakes Book</h1>
 
       <nav>
         <ul>
@@ -22,12 +30,24 @@ const Navbar = ({ auth }) => {
           </li>
 
           {!loading && isAuth ? (
-            <li className='login-out'>
-              <span className='logged-in-user'>
-                Logged in as {user.username}
-              </span>
-              <button onClick={handleLogout}>Logout</button>
-            </li>
+            <Fragment>
+              <li className='login-out'>
+                <UserIcon
+                  size={"2.5rem"}
+                  headColor={user.headColor}
+                  bodyColor={user.bodyColor}
+                  handleClick={() =>
+                    handleUserIconClick(showDropdown, setShowDropdown)
+                  }
+                />
+                {showDropdown && (
+                  <UserIconDropdown
+                    handleLogout={handleLogout}
+                    userId={user._id.toString()}
+                  />
+                )}
+              </li>
+            </Fragment>
           ) : (
             loading === false &&
             isAuth === false && (

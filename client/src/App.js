@@ -30,6 +30,7 @@ const App = () => {
           />
           <Route exact path='/auth/login/success' component={LoginSuccess} />
           <Route exact path='/newUser' component={NewUser} />
+          <Route exact path='/users/:id/edit' component={() => <NewUser />} />
         </Switch>
       </Router>
     </Provider>

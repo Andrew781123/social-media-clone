@@ -53,6 +53,7 @@ const NewUser = props => {
           </div>
           <Customize />
         </div>
+
         <button type='submit'>Next</button>
       </form>
     </div>
