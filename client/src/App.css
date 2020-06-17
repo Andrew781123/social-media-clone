@@ -9,6 +9,16 @@
   font-family: "Balsamiq Sans", cursive;
 }
 
+:root {
+  --primary-color: rgb(255, 255, 255);
+  --secondary-color: rgb(153, 153, 153);
+  --secondery-background-color: rgb(91, 91, 91);
+}
+
+body {
+  background-color: rgb(37, 37, 37);
+}
+
 button {
   background-color: transparent;
   border: none;
@@ -107,6 +117,10 @@ nav ul li {
 .post-form-container textarea {
   resize: none;
   height: 6rem;
+  padding: 0.2rem;
+  border: none;
+  background-color: var(--secondery-background-color);
+  color: var(--primary-color);
 }
 
 .post-form-container > form {
@@ -116,6 +130,9 @@ nav ul li {
 }
 
 .post-form-container select {
+  background-color: var(--secondery-background-color);
+  color: var(--primary-color);
+  border: none;
   width: 80%;
   height: 30px;
 }
@@ -145,9 +162,9 @@ nav ul li {
 }
 
 .welcome-container > .welcome-message {
-  margin-left: 1em;
+  margin-left: 0.2rem;
   color: white;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .welcome-container > .welcome-message .username {
@@ -236,7 +253,7 @@ nav ul li {
 
 .post-item-container {
   width: 100%;
-  background-color: rgba(228, 228, 228, 0.356);
+  background-color: rgb(57, 57, 57);
   margin-top: 1em;
   padding: 0.35em;
   border-radius: 0.7em;
@@ -254,13 +271,18 @@ nav ul li {
   display: inline-block;
 }
 
+.username-and-time > .post-item-username {
+  color: var(--primary-color);
+}
+
 .post-item-container > p {
   min-height: 5em;
   margin-top: 0.5em;
+  color: var(--primary-color);
 }
 
 .post-item-data {
-  color: rgb(141, 141, 141);
+  color: var(--secondary-color);
 }
 
 .like-button-and-count {
@@ -290,15 +312,20 @@ nav ul li {
   color: white;
 }
 
+.like-button-and-count .like-count {
+  color: var(--primary-color);
+}
+
 /* comment  */
 
 .show-comments {
+  color: var(--primary-color);
 }
 
 .show-comments:hover {
   cursor: pointer;
   text-decoration: underline;
-  color: rgba(33, 150, 245, 0.699);
+  color: rgb(68, 171, 255);
 }
 
 .post-comment {
@@ -306,6 +333,9 @@ nav ul li {
 }
 
 .post-comment-input {
+  background-color: var(--secondery-background-color);
+  color: var(--primary-color);
+  border: none;
   padding: 0.3rem 0.5rem;
   width: 80%;
   margin-top: 0.4rem;
@@ -313,7 +343,7 @@ nav ul li {
 }
 
 .comment-item-container {
-  background-color: rgba(192, 192, 192, 0.61);
+  background-color: var(--secondery-background-color);
   padding: 0.6rem;
   margin-top: 0.4rem;
   border-radius: 1rem;
@@ -330,11 +360,13 @@ nav ul li {
 
 .comment-item-user-info > .comment-item-username {
   margin-right: 0.5rem;
+  color: var(--primary-color);
 }
 
 .comment-item-container > .comment-item-content {
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
+  color: var(--primary-color);
 }
 
 /* newUser  */

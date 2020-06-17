@@ -55,8 +55,7 @@ const PostItem = ({
           Like
         </button>
         <small className='like-count'>
-          {post.likeCount} {post.likeCount === 1 ? "person" : "people"} like
-          this post
+          {post.likeCount} {post.likeCount === 1 ? "person" : "people"} liked
         </small>
       </div>
       <div className='post-comment'>
