@@ -43,3 +43,21 @@ export const updateUser = user => async dispatch => {
     console.error(err);
   }
 };
+
+export const createUser = user => async dispatch => {
+  try {
+    dispatch({ type: "SET_LOADING" });
+    const res = await axios({
+      method: "POST",
+      url: `/api/users`,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: user
+    });
+
+    dispatch({ type: "CREATE_USER", payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};

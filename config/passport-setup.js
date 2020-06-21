@@ -1,6 +1,8 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const { User } = require("../model/userDetail");
+const { User } = require("../model/user");
+const { UserDetail } = require("../model/userDetail");
+const { TempUser } = require("../model/tempUser");
 
 passport.use(
   new GoogleStrategy(
@@ -12,20 +14,15 @@ passport.use(
     async (accessToken, refreshTocken, profile, done) => {
       const { id, displayName } = profile;
 
-      const user = await User.findOne({ googleId: id });
-      if (user) {
-        user.isFirst = true;
-        await user.save();
+      const user = await UserDetail.findOne({ googleId: id });
+      console.log(user);
+      const tempUser = await TempUser.findOne({ googleId: id });
+      if (user || tempUser) {
         return done(null, user);
       }
-
-      const newUser = new User({
-        username: displayName,
-        googleId: id,
-        started: "Fri Jun 12 2020 20:43:10 GMT+0800 (Hong Kong Standard Time)"
-      });
-      const savedUser = await newUser.save();
-      done(null, savedUser);
+      const newUser = await createUser(id);
+      console.log("shouldnt here");
+      done(null, newUser);
     }
   )
 );
@@ -35,6 +32,19 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id);
+  let user;
+  user = await User.findById(id);
+  if (!user) {
+    user = await TempUser.findById(id);
+  }
   done(null, user);
 });
+
+const createUser = async googleId => {
+  const newTempUser = new TempUser({
+    googleId
+  });
+
+  const savedTempUser = await newTempUser.save();
+  return savedTempUser;
+};

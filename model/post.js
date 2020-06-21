@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const commentSchema = require("./comment");
+const { userSchema } = require("./user");
+const { commentSchema } = require("./comment");
 const moment = require("moment");
-const { userSchema } = require("./userDetail");
 
 const postSchema = new mongoose.Schema(
   {
@@ -18,9 +18,9 @@ const postSchema = new mongoose.Schema(
     },
 
     createdAt: {
-      type: String,
+      type: Date,
       default: () => {
-        return moment(Date.now()).format("DD MMM");
+        return Date.now();
       }
     },
 
@@ -36,12 +36,16 @@ const postSchema = new mongoose.Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
+postSchema.virtual("formattedCreatedAt").get(function () {
+  return moment(this.createdAt).format("DD MMM, H:mm");
+});
+
 postSchema.virtual("likeCount").get(function () {
   return this.likes.length;
 });
 
-postSchema.virtual("commentCount").get(function () {
-  return this.comments.length;
-});
+const Post = mongoose.model("post", postSchema);
 
-module.exports = mongoose.model("post", postSchema);
+module.exports = {
+  Post
+};

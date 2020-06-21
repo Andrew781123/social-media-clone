@@ -89,7 +89,7 @@ export const getComments = (postId, commentNum) => async dispatch => {
     });
     dispatch({
       type: "GET_COMMENTS",
-      payload: { comments: res.data[0].recentComments, postId }
+      payload: { comments: res.data, postId }
     });
   } catch (err) {
     console.error(err);

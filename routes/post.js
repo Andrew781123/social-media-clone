@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const Post = require("../model/post");
-const { User } = require("../model/userDetail");
-const { Mongoose } = require("mongoose");
+const { Post } = require("../model/post");
+const { User } = require("../model/user");
+const { Comment } = require("../model/comment");
 
 router.get("/", async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ createdAt: -1 }).exec();
+    //sort comments
+
     res.status(200).json(posts);
   } catch (err) {
     console.error(err);
@@ -19,16 +21,16 @@ router.post("/", async (req, res) => {
   const { user, content, isPublic } = req.body;
 
   try {
+    //create new post
     const newPost = new Post({
       user,
       content,
       isPublic
     });
-    const author = await User.findOne({ username: user.username });
-    const savedPost = await newPost.save();
-    //push new post to user
-    author.posts.push(savedPost);
+    //shift and push to user
 
+    //save
+    const savedPost = await newPost.save();
     res.status(201).json(savedPost);
   } catch (err) {
     console.error(err);
@@ -71,11 +73,12 @@ router.delete("/:id", async (req, res) => {
 });
 
 router.post("/:id/likes/increment", async (req, res) => {
+  const { userId } = req.body;
+
   try {
     const post = await Post.findById(req.params.id);
-    const user = await User.findById(req.body.userId);
 
-    post.likes.push(user._id);
+    post.likes.push(userId);
     const savedPost = await post.save();
     res.status(201).json(savedPost);
   } catch (err) {
@@ -85,13 +88,12 @@ router.post("/:id/likes/increment", async (req, res) => {
 });
 
 router.post("/:id/likes/decrement", async (req, res) => {
+  const { userId } = req.body;
+
   try {
     const post = await Post.findById(req.params.id);
-    const user = await User.findById(req.body.userId);
 
-    const newLikes = post.likes.filter(
-      _id => _id.toString() !== user._id.toString()
-    );
+    const newLikes = post.likes.filter(_id => _id.toString() !== userId);
     post.likes = newLikes;
     const savedPost = await post.save();
     res.status(201).json(savedPost);
@@ -101,17 +103,13 @@ router.post("/:id/likes/decrement", async (req, res) => {
   }
 });
 
+//get comments of a post
 router.get("/:id/comments", async (req, res) => {
   try {
-    const _id = mongoose.Types.ObjectId(req.params.id);
-    const comments = await Post.aggregate([
-      { $match: { _id: _id } },
-      {
-        $project: {
-          recentComments: { $slice: ["$comments", -1 * req.query.num] }
-        }
-      }
-    ]);
+    const comments = await Comment.find({ post: req.params.id });
+
+    //sort the comments
+
     res.status(200).json(comments);
   } catch (err) {
     console.error(err);
@@ -119,18 +117,25 @@ router.get("/:id/comments", async (req, res) => {
   }
 });
 
+//create comment
 router.post("/:id/comments", async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id).select("comments");
-    const newComment = {
-      user: req.body.user,
-      content: req.body.content
-    };
-    post.comments.push(newComment);
-    const savedPost = await post.save();
+  const { user, content } = req.body;
+  const newComment = new Comment({
+    post: req.params.id,
+    user,
+    content
+  });
 
-    // get the newly pushed comment
-    const savedComment = savedPost.comments[savedPost.comments.length - 1];
+  try {
+    //save to comment collection
+    const savedComment = await newComment.save();
+
+    //shift and push comment to post
+    const post = await Post.findById(req.params.id);
+    if (post.comments.length === 3) post.comments.shift();
+    post.comments.push(savedComment);
+    await post.save();
+
     res.status(201).json(savedComment);
   } catch (err) {
     console.error(err);

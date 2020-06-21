@@ -34,8 +34,8 @@ const Navbar = ({ auth }) => {
               <li className='login-out'>
                 <UserIcon
                   size={"2.5rem"}
-                  headColor={user.headColor}
-                  bodyColor={user.bodyColor}
+                  headColor={user.icon.headColor}
+                  bodyColor={user.icon.bodyColor}
                   handleClick={() =>
                     handleUserIconClick(showDropdown, setShowDropdown)
                   }
