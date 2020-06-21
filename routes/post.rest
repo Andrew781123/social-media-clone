@@ -8,7 +8,9 @@ Content-Type: application/json
 {
     "user": {
         "username": "Andrew"
+        
     },
+    "isPublic": "true",
     "content": "A post hahaha"
 }
 
@@ -34,3 +36,15 @@ Content-Type: application/json
   "content": "comment1"
 }
 
+###
+# incLike
+POST http://localhost:5000/api/posts/5ee9c9f26605f64334cb7988/likes/increment
+Content-Type: application/json
+
+{
+  "userId": "5ee378b6448f3455cc28a60e"
+}
+
+###
+# get comments
+GET http://localhost:5000/api/posts/5ee9c9f26605f64334cb7988/comments?num=3&shown=3

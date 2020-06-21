@@ -17,7 +17,7 @@ router.get(
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   console.log(req.user.isFirst);
   if (req.user.isFirst) {
-    res.redirect("http://localhost:3000/newUser");
+    res.redirect(`http://localhost:3000/newUser?gId=${req.id}`);
   } else res.redirect("http://localhost:3000/");
 });
 

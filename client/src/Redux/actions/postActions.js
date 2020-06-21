@@ -79,6 +79,7 @@ export const decLike = (currentUserId, postId) => async dispatch => {
 };
 
 export const getComments = (postId, commentNum) => async dispatch => {
+  dispatch({ type: "SET_COMMENT_LOADING" });
   try {
     const res = await axios({
       method: "GET",
@@ -87,10 +88,12 @@ export const getComments = (postId, commentNum) => async dispatch => {
         "Content-Type": "application/json"
       }
     });
-    dispatch({
-      type: "GET_COMMENTS",
-      payload: { comments: res.data[0].recentComments, postId }
-    });
+    setTimeout(() => {
+      dispatch({
+        type: "GET_COMMENTS",
+        payload: { comments: res.data[0].recentComments, postId }
+      });
+    }, 500);
   } catch (err) {
     console.error(err);
   }

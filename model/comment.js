@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
-const userBasicSchema = require("./userBasic");
 const likeSchema = require("./like");
 const moment = require("moment");
 const { userSchema } = require("./userDetail");
 
 const commentSchema = new mongoose.Schema({
+  post: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "post"
+  },
+
   user: userSchema,
 
   content: {
@@ -13,9 +17,9 @@ const commentSchema = new mongoose.Schema({
   },
 
   createdAt: {
-    type: String,
+    type: Date,
     default: () => {
-      return moment(Date.now()).format("DD MMM");
+      return Date.now();
     }
   },
 
@@ -26,4 +30,13 @@ commentSchema.virtual("likeCount").get(function () {
   return this.likes.length;
 });
 
-module.exports = commentSchema;
+commentSchema.virtual("formattedCreatedAt").get(function () {
+  return moment(this.createdAt).format("DD MMM, H:mm");
+});
+
+const Comment = mongoose.model("comment", commentSchema);
+
+module.exports = {
+  Comment,
+  commentSchema
+};

@@ -3,8 +3,6 @@ import UserIcon from "../user/UserIcon";
 import CreatedTime from "./CreatedTime";
 
 const PostCommentItem = ({ comment }) => {
-  // const { comment } = comment;
-
   return (
     <div className='comment-item-container'>
       <div className='comment-item-user-info'>

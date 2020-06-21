@@ -11,8 +11,7 @@ const PostItem = ({
   decLike,
   addComment,
   user,
-  comments,
-  getComments
+  comments
 }) => {
   const [isLiked, setIsLiked] = useState(null);
 
@@ -43,7 +42,7 @@ const PostItem = ({
         />
         <div className='username-and-time'>
           <p className='post-item-username'>{post.user.username}</p>
-          <CreatedTime createdAt={post.createdAt} />
+          <CreatedTime createdAt={post.formattedCreatedAt} />
         </div>
       </div>
       <p>{post.content}</p>
@@ -54,20 +53,11 @@ const PostItem = ({
         >
           Like
         </button>
-        <small className='like-count'>
-          {post.likeCount}{" "}
-          {post.likeCount === 0
-            ? "No"
-            : post.likeCount === 1
-            ? "person"
-            : "people"}{" "}
-          liked
-        </small>
+        <small className='like-count'></small>
       </div>
       <div className='post-comment'>
         <PostComments
           comments={comments}
-          getComments={getComments}
           postId={post._id.toString()}
           commentCount={post.commentCount}
           post={post}

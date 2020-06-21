@@ -19,7 +19,7 @@ const Navbar = ({ auth }) => {
 
   return (
     <header>
-      <h1>Fakes Book</h1>
+      <h1>FakesBook</h1>
 
       <nav>
         <ul>

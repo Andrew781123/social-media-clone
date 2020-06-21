@@ -5,19 +5,10 @@ import {
   getPost,
   incLike,
   decLike,
-  addComment,
-  getComments
+  addComment
 } from "../../Redux/actions/postActions";
 
-const Posts = ({
-  post,
-  auth,
-  getPost,
-  incLike,
-  decLike,
-  addComment,
-  getComments
-}) => {
+const Posts = ({ post, auth, getPost, incLike, decLike, addComment }) => {
   const { posts, loading, comments } = post;
   const { user } = auth;
   const { _id } = user;
@@ -40,7 +31,6 @@ const Posts = ({
             addComment={addComment}
             user={user}
             comments={comments}
-            getComments={getComments}
           />
         ))
       ) : (
@@ -60,8 +50,7 @@ const mapDispatchToProps = dispatch => ({
   incLike: (currentUserId, postId) => dispatch(incLike(currentUserId, postId)),
   decLike: (currentUserId, postId) => dispatch(decLike(currentUserId, postId)),
   addComment: (username, postId, comment) =>
-    dispatch(addComment(username, postId, comment)),
-  getComments: (postId, commentNum) => dispatch(getComments(postId, commentNum))
+    dispatch(addComment(username, postId, comment))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

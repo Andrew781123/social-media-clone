@@ -1,6 +1,7 @@
 const initialState = {
-  posts: [{ comments: [] }],
-  loading: null
+  posts: [],
+  loading: null,
+  loadingComments: null
 };
 
 const postReducer = (state = initialState, action) => {
@@ -25,12 +26,18 @@ const postReducer = (state = initialState, action) => {
         loading: true
       };
     }
+    case "SET_COMMENT_LOADING": {
+      return {
+        ...state,
+        loadingComments: true
+      };
+    }
     case "INC_LIKE": {
       return {
         ...state,
         posts: state.posts.map(post => {
           if (post._id.toString() === action.payload._id.toString())
-            return action.payload;
+            return { ...post, ...action.payload };
           else return post;
         })
       };
@@ -40,7 +47,7 @@ const postReducer = (state = initialState, action) => {
         ...state,
         posts: state.posts.map(post => {
           if (post._id.toString() === action.payload._id.toString())
-            return action.payload;
+            return { ...post, ...action.payload };
           else return post;
         })
       };
@@ -52,7 +59,8 @@ const postReducer = (state = initialState, action) => {
           if (post._id.toString() === action.payload.postId)
             return { ...post, comments: action.payload.comments };
           else return post;
-        })
+        }),
+        loadingComments: false
       };
     }
     case "ADD_COMMENT": {

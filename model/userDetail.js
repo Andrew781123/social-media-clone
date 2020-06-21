@@ -29,7 +29,6 @@ const userDetailSchema = new mongoose.Schema({
 
   started: {
     type: Date,
-    required: true,
     get: getExperience
   },
 

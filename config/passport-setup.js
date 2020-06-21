@@ -14,18 +14,19 @@ passport.use(
 
       const user = await User.findOne({ googleId: id });
       if (user) {
-        user.isFirst = true;
+        user.isFirst = false;
         await user.save();
         return done(null, user);
       }
 
-      const newUser = new User({
-        username: displayName,
-        googleId: id,
-        started: "Fri Jun 12 2020 20:43:10 GMT+0800 (Hong Kong Standard Time)"
-      });
-      const savedUser = await newUser.save();
-      done(null, savedUser);
+      // const newUser = new User({
+      //   username: displayName,
+      //   googleId: id,
+      //   started: "Fri Jun 12 2020 20:43:10 GMT+0800 (Hong Kong Standard Time)"
+      // });
+      // const savedUser = await newUser.save();
+
+      done(null, id);
     }
   )
 );

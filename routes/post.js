@@ -3,11 +3,14 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Post = require("../model/post");
 const { User } = require("../model/userDetail");
-const { Mongoose } = require("mongoose");
+const { Comment } = require("../model/comment");
 
 router.get("/", async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.aggregate([
+      { $sort: { createdAt: -1, "comments.createdAt": -1 } }
+    ]);
+    // const posts = await Post.find().sort({ createdAt: -1 }).exec();
     res.status(200).json(posts);
   } catch (err) {
     console.error(err);
@@ -72,7 +75,7 @@ router.delete("/:id", async (req, res) => {
 
 router.post("/:id/likes/increment", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).select("likes");
     const user = await User.findById(req.body.userId);
 
     post.likes.push(user._id);
@@ -86,7 +89,7 @@ router.post("/:id/likes/increment", async (req, res) => {
 
 router.post("/:id/likes/decrement", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).select("likes");
     const user = await User.findById(req.body.userId);
 
     const newLikes = post.likes.filter(
@@ -103,16 +106,8 @@ router.post("/:id/likes/decrement", async (req, res) => {
 
 router.get("/:id/comments", async (req, res) => {
   try {
-    const _id = mongoose.Types.ObjectId(req.params.id);
-    const comments = await Post.aggregate([
-      { $match: { _id: _id } },
-      {
-        $project: {
-          recentComments: { $slice: ["$comments", -1 * req.query.num] }
-        }
-      }
-    ]);
-    res.status(200).json(comments);
+    const comments = await Comment.find({ post: req.params.id });
+    res.status(200).json({ comments });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });
@@ -126,12 +121,16 @@ router.post("/:id/comments", async (req, res) => {
       user: req.body.user,
       content: req.body.content
     };
+    const comment = new Comment({ ...newComment, post: req.params.id });
+    if (post.comments.length === 3) post.comments.shift();
     post.comments.push(newComment);
+
     const savedPost = await post.save();
+    await comment.save();
 
     // get the newly pushed comment
-    const savedComment = savedPost.comments[savedPost.comments.length - 1];
-    res.status(201).json(savedComment);
+    const lastestComment = savedPost.comments[savedPost.comments.length - 1];
+    res.status(201).json(lastestComment);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });
