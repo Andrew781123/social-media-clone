@@ -37,8 +37,8 @@ const PostItem = ({
       <div className='user-info'>
         <UserIcon
           size='3.2em'
-          headColor={post.user.headColor}
-          bodyColor={post.user.bodyColor}
+          headColor={post.user.icon.headColor}
+          bodyColor={post.user.icon.bodyColor}
         />
         <div className='username-and-time'>
           <p className='post-item-username'>{post.user.username}</p>

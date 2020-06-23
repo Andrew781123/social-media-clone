@@ -14,7 +14,10 @@ const PostComments = props => {
   } = props;
 
   useEffect(() => {
-    getComments(postId, 3, commentShown);
+    // getComments(postId, commentShown);
+    if (commentCount <= commentShown) setIsMoreComments(false);
+    else setIsMoreComments(true);
+    // eslint-disable-next-line
   }, []);
 
   const handleClick = async () => {

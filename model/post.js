@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
+
+const { userSchema } = require("./user");
+
 const { commentSchema } = require("./comment");
 const moment = require("moment");
-const { userSchema } = require("./userDetail");
 
 const postSchema = new mongoose.Schema(
   {
@@ -36,16 +38,16 @@ const postSchema = new mongoose.Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-// postSchema.virtual("likeCount").get(function () {
-//   return this.likes.length;
-// });
-
-// postSchema.virtual("commentCount").get(function () {
-//   return this.comments.length;
-// });
-
 postSchema.virtual("formattedCreatedAt").get(function () {
   return moment(this.createdAt).format("DD MMM, H:mm");
 });
 
-module.exports = mongoose.model("post", postSchema);
+postSchema.virtual("likeCount").get(function () {
+  return this.likes.length;
+});
+
+const Post = mongoose.model("post", postSchema);
+
+module.exports = {
+  Post
+};

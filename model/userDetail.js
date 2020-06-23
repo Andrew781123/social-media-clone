@@ -1,49 +1,41 @@
 const mongoose = require("mongoose");
-
-function getExperience(started) {
-  const start = started;
-  const now = new Date();
-  return start.diff(now, "years");
-}
+const { userIconSchema } = require("./user");
 
 const userDetailSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user"
+  },
+
   username: {
     type: String,
     required: true
   },
 
-  headColor: {
-    type: String,
-    default: "white"
-  },
-
-  bodyColor: {
-    type: String,
-    default: "blue"
-  },
+  icon: userIconSchema,
 
   googleId: {
     type: String,
     required: true
   },
 
-  started: {
+  joined: {
     type: Date,
+<<<<<<< HEAD
     get: getExperience
+=======
+    default: () => new Date()
+>>>>>>> refactor
   },
 
   isFirst: {
     type: Boolean,
     default: true
-  },
-
-  posts: [
-    {
-      type: mongoose.Schema.Types.ObjectId
-    }
-  ]
+  }
 });
 
-module.exports.userSchema = userDetailSchema;
+const UserDetail = mongoose.model("user_detail", userDetailSchema);
 
-module.exports.User = mongoose.model("userDetail", userDetailSchema);
+module.exports = {
+  UserDetail
+};

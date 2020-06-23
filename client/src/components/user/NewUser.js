@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import UserIcon from "./UserIcon";
 import Customize from "./Customize";
-import { updateUser } from "../../Redux/actions/authActions";
+import { createUser } from "../../Redux/actions/authActions";
 
 const NewUser = props => {
-  const { user, updateUser } = props;
+  const { user, createUser } = props;
 
   useEffect(() => {
     if (user.username) setUser({ ...newUser, username: user.username });
@@ -21,13 +21,16 @@ const NewUser = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const saveUser = {
-      userId: user._id.toString(),
+    let search = window.location.search;
+    let params = new URLSearchParams(search);
+    let tempUserId = params.get("id");
+    const userToSave = {
+      tempUserId,
       username: newUser.username,
       headColor: user.headColor,
       bodyColor: user.bodyColor
     };
-    updateUser(saveUser);
+    createUser(userToSave);
     props.history.push("/");
   };
 
@@ -65,7 +68,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUser: user => dispatch(updateUser(user))
+  createUser: user => dispatch(createUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewUser);

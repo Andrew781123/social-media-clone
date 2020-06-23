@@ -1,6 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const { User } = require("../model/userDetail");
+const { User } = require("../model/user");
+const { TempUser } = require("../model/tempUser");
 
 passport.use(
   new GoogleStrategy(
@@ -13,7 +14,10 @@ passport.use(
       const { id, displayName } = profile;
 
       const user = await User.findOne({ googleId: id });
+      console.log(user);
+      const tempUser = await TempUser.findOne({ googleId: id });
       if (user) {
+<<<<<<< HEAD
         user.isFirst = false;
         await user.save();
         return done(null, user);
@@ -27,6 +31,13 @@ passport.use(
       // const savedUser = await newUser.save();
 
       done(null, id);
+=======
+        return done(null, user);
+      }
+      const newUser = await createUser(id);
+      console.log("shouldnt here");
+      done(null, newUser);
+>>>>>>> refactor
     }
   )
 );
@@ -36,6 +47,19 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id);
+  let user;
+  user = await User.findById(id);
+  if (!user) {
+    user = await TempUser.findById(id);
+  }
   done(null, user);
 });
+
+const createUser = async googleId => {
+  const newTempUser = new TempUser({
+    googleId
+  });
+
+  const savedTempUser = await newTempUser.save();
+  return savedTempUser;
+};

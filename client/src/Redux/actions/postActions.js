@@ -7,7 +7,6 @@ export const getPost = () => async dispatch => {
       method: "GET",
       url: "/api/posts"
     });
-
     dispatch({ type: "GET_POST", payload: res.data });
   } catch (err) {
     console.error(err);
@@ -88,12 +87,11 @@ export const getComments = (postId, commentNum) => async dispatch => {
         "Content-Type": "application/json"
       }
     });
-    setTimeout(() => {
-      dispatch({
-        type: "GET_COMMENTS",
-        payload: { comments: res.data[0].recentComments, postId }
-      });
-    }, 500);
+
+    dispatch({
+      type: "GET_COMMENTS",
+      payload: { comments: res.data, postId }
+    });
   } catch (err) {
     console.error(err);
   }
