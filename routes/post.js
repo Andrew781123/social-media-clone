@@ -82,26 +82,16 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.post("/:id/likes", async (req, res) => {
+router.post("/:id/likes/decrement", async (req, res) => {
   const { userId } = req.body;
+
   try {
     const post = await Post.findById(req.params.id);
-    let likes;
-    switch (req.query.type) {
-      case "increment": {
-        post.likes.push(userId);
-        console.log(post.likes);
-        likes = post.likes;
-        break;
-      }
-      case "decrement": {
-        likes = post.likes.filter(_id => _id.toString() !== userId);
-        post.likes = likes;
-        break;
-      }
-    }
-    await post.save();
-    res.status(201).json({ postId: post._id, likes });
+
+    const newLikes = post.likes.filter(_id => _id.toString() !== userId);
+    post.likes = newLikes;
+    const savedPost = await post.save();
+    res.status(201).json(savedPost);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });
