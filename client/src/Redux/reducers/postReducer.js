@@ -32,26 +32,27 @@ const postReducer = (state = initialState, action) => {
         loadingComments: true
       };
     }
-    case "INC_LIKE": {
-      return {
-        ...state,
-        posts: state.posts.map(post => {
-          if (post._id.toString() === action.payload._id.toString())
-            return { ...post, ...action.payload };
-          else return post;
-        })
-      };
-    }
+    case "INC_LIKE":
     case "DEC_LIKE": {
       return {
         ...state,
         posts: state.posts.map(post => {
-          if (post._id.toString() === action.payload._id.toString())
-            return { ...post, ...action.payload };
+          if (post._id.toString() === action.payload.postId.toString())
+            return { ...post, likes: action.payload.likes };
           else return post;
         })
       };
     }
+    // case "DEC_LIKE": {
+    //   return {
+    //     ...state,
+    //     posts: state.posts.map(post => {
+    //       if (post._id.toString() === action.payload._id.toString())
+    //         return { ...post, ...action.payload };
+    //       else return post;
+    //     })
+    //   };
+    // }
     case "GET_COMMENTS": {
       return {
         ...state,

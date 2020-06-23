@@ -44,7 +44,7 @@ export const incLike = (currentUserId, postId) => async dispatch => {
   try {
     const res = await axios({
       method: "POST",
-      url: `/api/posts/${postId}/likes/increment`,
+      url: `/api/posts/${postId}/likes/?type=increment`,
       headers: {
         "Content-Type": "application/json"
       },
@@ -52,7 +52,7 @@ export const incLike = (currentUserId, postId) => async dispatch => {
         userId: currentUserId
       }
     });
-    dispatch({ type: "INC_LIKE", payload: res.data });
+    dispatch({ type: "INC_LIKE", payload: { ...res.data } });
   } catch (err) {
     console.error(err);
   }
@@ -62,7 +62,7 @@ export const decLike = (currentUserId, postId) => async dispatch => {
   try {
     const res = await axios({
       method: "POST",
-      url: `/api/posts/${postId}/likes/decrement`,
+      url: `/api/posts/${postId}/likes/?type=decrement`,
       headers: {
         "Content-Type": "application/json"
       },
