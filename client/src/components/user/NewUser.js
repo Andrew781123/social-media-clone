@@ -21,6 +21,7 @@ const NewUser = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    //get query string
     let search = window.location.search;
     let params = new URLSearchParams(search);
     let tempUserId = params.get("id");
