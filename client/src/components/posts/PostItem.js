@@ -11,7 +11,8 @@ const PostItem = ({
   decLike,
   addComment,
   user,
-  comments
+  comments,
+  getComments
 }) => {
   const [isLiked, setIsLiked] = useState(null);
 
@@ -61,6 +62,7 @@ const PostItem = ({
           postId={post._id.toString()}
           commentCount={post.commentCount}
           post={post}
+          getComments={getComments}
         />
         <PostCommentForm
           addComment={addComment}
