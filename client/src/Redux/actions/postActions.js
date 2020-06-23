@@ -7,7 +7,6 @@ export const getPost = () => async dispatch => {
       method: "GET",
       url: "/api/posts"
     });
-
     dispatch({ type: "GET_POST", payload: res.data });
   } catch (err) {
     console.error(err);

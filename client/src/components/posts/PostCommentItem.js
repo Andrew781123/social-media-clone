@@ -10,11 +10,11 @@ const PostCommentItem = ({ comment }) => {
       <div className='comment-item-user-info'>
         <UserIcon
           size='1.7em'
-          headColor={comment.user.headColor}
-          bodyColor={comment.user.bodyColor}
+          headColor={comment.user.icon.headColor}
+          bodyColor={comment.user.icon.bodyColor}
         />
         <span className='comment-item-username'>{comment.user.username}</span>
-        <CreatedTime createdAt={comment.createdAt} />
+        <CreatedTime createdAt={comment.formattedCreatedAt} />
       </div>
       <p className='comment-item-content'>{comment.content}</p>
     </div>

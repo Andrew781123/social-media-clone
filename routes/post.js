@@ -10,7 +10,16 @@ router.get("/", async (req, res) => {
     const posts = await Post.find().sort({ createdAt: -1 }).exec();
     //sort comments
 
-    res.status(200).json(posts);
+    //get commentCount
+    let commentCount = 0;
+    let postReturn = [];
+    for (const post of posts) {
+      const postObject = post.toObject();
+      commentCount = await Comment.getCommentCount(post._id);
+      postReturn.push({ ...postObject, commentCount });
+    }
+
+    res.status(200).json(postReturn);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });

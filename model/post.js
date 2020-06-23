@@ -44,6 +44,10 @@ postSchema.virtual("likeCount").get(function () {
   return this.likes.length;
 });
 
+// postSchema.virtual("commentCount").get(function () {
+//   return this.comments.length;
+// });
+
 const Post = mongoose.model("post", postSchema);
 
 module.exports = {

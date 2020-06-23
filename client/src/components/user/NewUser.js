@@ -24,13 +24,13 @@ const NewUser = props => {
     let search = window.location.search;
     let params = new URLSearchParams(search);
     let tempUserId = params.get("id");
-    const user = {
+    const userToSave = {
       tempUserId,
       username: newUser.username,
-      headColor: newUser.headColor,
-      bodyColor: newUser.bodyColor
+      headColor: user.headColor,
+      bodyColor: user.bodyColor
     };
-    createUser(user);
+    createUser(userToSave);
     props.history.push("/");
   };
 

@@ -18,6 +18,11 @@ const userSchema = new mongoose.Schema({
     required: true
   },
 
+  googleId: {
+    type: String,
+    required: true
+  },
+
   icon: userIconSchema
 });
 

@@ -7,12 +7,15 @@ const { TempUser } = require("../model/tempUser");
 //create user
 router.post("/", async (req, res) => {
   const { username, tempUserId, headColor, bodyColor } = req.body;
+  console.log(headColor, bodyColor);
 
   try {
     //get tempUser
     const tempUser = await TempUser.findById(tempUserId);
+    console.log(tempUser);
     //check if user already exists
     const user = await User.findOne({ username });
+    console.log(user);
     if (user) {
       return res.status(400).json({ message: "Username has been registered" });
     }
@@ -22,7 +25,8 @@ router.post("/", async (req, res) => {
       icon: {
         bodyColor,
         headColor
-      }
+      },
+      googleId: tempUser.googleId
     });
     const savedUser = await newUser.save();
 

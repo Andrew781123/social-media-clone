@@ -1,7 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const { User } = require("../model/user");
-const { UserDetail } = require("../model/userDetail");
 const { TempUser } = require("../model/tempUser");
 
 passport.use(
@@ -14,10 +13,10 @@ passport.use(
     async (accessToken, refreshTocken, profile, done) => {
       const { id, displayName } = profile;
 
-      const user = await UserDetail.findOne({ googleId: id });
+      const user = await User.findOne({ googleId: id });
       console.log(user);
       const tempUser = await TempUser.findOne({ googleId: id });
-      if (user || tempUser) {
+      if (user) {
         return done(null, user);
       }
       const newUser = await createUser(id);
