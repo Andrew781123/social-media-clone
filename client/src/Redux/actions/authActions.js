@@ -44,43 +44,6 @@ export const updateUser = user => async dispatch => {
   }
 };
 
-<<<<<<< HEAD
-export const getComments = (postId, commentNum) => async dispatch => {
-  dispatch({ type: "SET_COMMENT_LOADING" });
-  try {
-    const res = await axios({
-      method: "GET",
-      url: `/api/posts/${postId}/comments?num=${commentNum}`,
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    setTimeout(() => {
-      dispatch({
-        type: "GET_COMMENTS",
-        payload: { comments: res.data[0].recentComments, postId }
-      });
-    }, 1000);
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-export const addComment = (user, postId, comment) => async dispatch => {
-  try {
-    const res = await axios({
-      method: "POST",
-      url: `/api/posts/${postId}/comments`,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: {
-        user,
-        content: comment
-      }
-    });
-    dispatch({ type: "ADD_COMMENT", payload: { comment: res.data, postId } });
-=======
 export const createUser = user => async dispatch => {
   try {
     dispatch({ type: "SET_LOADING" });
@@ -94,7 +57,6 @@ export const createUser = user => async dispatch => {
     });
 
     dispatch({ type: "CREATE_USER", payload: res.data });
->>>>>>> refactor
   } catch (err) {
     console.error(err);
   }
