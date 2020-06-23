@@ -115,8 +115,15 @@ router.post("/:id/likes/decrement", async (req, res) => {
 
 //get comments of a post
 router.get("/:id/comments", async (req, res) => {
+  const { skip, num } = req.query;
+  const skipNum = +skip;
+  const commentNum = +num;
+
   try {
-    const comments = await Comment.find({ post: req.params.id });
+    const comments = await Comment.find({ post: req.params.id })
+      .skip(skipNum)
+      .limit(commentNum)
+      .exec();
 
     //sort the comments
 

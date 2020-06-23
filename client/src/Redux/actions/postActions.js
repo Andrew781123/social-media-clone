@@ -77,17 +77,16 @@ export const decLike = (currentUserId, postId) => async dispatch => {
   }
 };
 
-export const getComments = (postId, commentNum) => async dispatch => {
+export const getComments = (postId, skip, commentNum) => async dispatch => {
   dispatch({ type: "SET_COMMENT_LOADING" });
   try {
     const res = await axios({
       method: "GET",
-      url: `/api/posts/${postId}/comments?num=${commentNum}`,
+      url: `/api/posts/${postId}/comments?skip=${skip}&num=${commentNum}`,
       headers: {
         "Content-Type": "application/json"
       }
     });
-
     dispatch({
       type: "GET_COMMENTS",
       payload: { comments: res.data, postId }

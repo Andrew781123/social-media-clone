@@ -57,7 +57,10 @@ const postReducer = (state = initialState, action) => {
         ...state,
         posts: state.posts.map(post => {
           if (post._id.toString() === action.payload.postId)
-            return { ...post, comments: action.payload.comments };
+            return {
+              ...post,
+              comments: [...action.payload.comments, ...post.comments]
+            };
           else return post;
         }),
         loadingComments: false

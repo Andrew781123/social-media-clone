@@ -61,7 +61,8 @@ const mapDispatchToProps = dispatch => ({
   decLike: (currentUserId, postId) => dispatch(decLike(currentUserId, postId)),
   addComment: (username, postId, comment) =>
     dispatch(addComment(username, postId, comment)),
-  getComments: (postId, commentNum) => dispatch(getComments(postId, commentNum))
+  getComments: (postId, skip, commentNum) =>
+    dispatch(getComments(postId, skip, commentNum))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

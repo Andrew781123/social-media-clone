@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PostCommentItem from "./PostCommentItem";
 
+let commentNum = 3;
+
 const PostComments = ({ getComments, postId, commentCount, post }) => {
   const { comments } = post;
 
-  const [commentShown, setcommentShown] = useState(3);
+  const [commentShown, setcommentShown] = useState(commentNum);
   const [isMoreComments, setIsMoreComments] = useState(null);
 
   useEffect(() => {
@@ -15,18 +17,23 @@ const PostComments = ({ getComments, postId, commentCount, post }) => {
   }, []);
 
   const handleClick = async () => {
-    getComments(postId, commentShown + 5);
-    if (commentCount <= commentShown + 5) {
+    let skip = commentCount - commentShown - commentNum;
+    if (skip <= 0) {
+      skip = 0;
+      commentNum = commentCount - commentShown;
+    }
+    getComments(postId, skip, commentNum);
+    if (commentCount <= commentShown + commentNum) {
       setIsMoreComments(false);
     }
-    setcommentShown(num => num + 5);
+    setcommentShown(num => num + commentNum);
   };
 
   return (
     <div>
       {isMoreComments && (
         <p className='show-comments' onClick={handleClick}>
-          View more
+          View more {`(${commentCount - commentShown})`}
         </p>
       )}
       {comments.map(comment => (
