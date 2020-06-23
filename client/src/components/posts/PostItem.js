@@ -54,7 +54,18 @@ const PostItem = ({
         >
           Like
         </button>
-        <small className='like-count'></small>
+        <small className='like-count'>
+          {post.likeCount === 0
+            ? "陰公冇人like :("
+            : post.likeCount === 1 && isLiked === true
+            ? "得自己like"
+            : post.likeCount === 1 &&
+              post.likes[0].toString() === post.user._id.toString()
+            ? "得佢自己like"
+            : post.likeCount === 1 && isLiked === false
+            ? `${post.likeCount} person liked`
+            : post.likeCount > 1 && `${post.likeCount} people liked`}
+        </small>
       </div>
       <div className='post-comment'>
         <PostComments

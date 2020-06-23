@@ -41,7 +41,8 @@ router.post("/", async (req, res) => {
 
     //save
     const savedPost = await newPost.save();
-    res.status(201).json(savedPost);
+    const postObject = savedPost.toObject();
+    res.status(201).json({ ...postObject, commentCount: 0 });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });
@@ -82,16 +83,26 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.post("/:id/likes/decrement", async (req, res) => {
+router.post("/:id/likes", async (req, res) => {
   const { userId } = req.body;
-
   try {
     const post = await Post.findById(req.params.id);
+    switch (req.query.type) {
+      case "increment": {
+        post.likes.push(userId);
+        break;
+      }
+      case "decrement": {
+        post.likes = post.likes.filter(_id => _id.toString() !== userId);
+        break;
+      }
+    }
 
-    const newLikes = post.likes.filter(_id => _id.toString() !== userId);
-    post.likes = newLikes;
     const savedPost = await post.save();
-    res.status(201).json(savedPost);
+
+    const { likes, likeCount } = savedPost;
+
+    res.status(201).json({ postId: post._id, likes, likeCount });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });
