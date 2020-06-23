@@ -17,27 +17,11 @@ passport.use(
       console.log(user);
       const tempUser = await TempUser.findOne({ googleId: id });
       if (user) {
-<<<<<<< HEAD
-        user.isFirst = false;
-        await user.save();
-        return done(null, user);
-      }
-
-      // const newUser = new User({
-      //   username: displayName,
-      //   googleId: id,
-      //   started: "Fri Jun 12 2020 20:43:10 GMT+0800 (Hong Kong Standard Time)"
-      // });
-      // const savedUser = await newUser.save();
-
-      done(null, id);
-=======
         return done(null, user);
       }
       const newUser = await createUser(id);
       console.log("shouldnt here");
       done(null, newUser);
->>>>>>> refactor
     }
   )
 );

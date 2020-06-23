@@ -21,11 +21,7 @@ const userDetailSchema = new mongoose.Schema({
 
   joined: {
     type: Date,
-<<<<<<< HEAD
-    get: getExperience
-=======
     default: () => new Date()
->>>>>>> refactor
   },
 
   isFirst: {

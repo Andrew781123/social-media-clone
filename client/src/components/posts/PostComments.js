@@ -1,17 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PostCommentItem from "./PostCommentItem";
-import { getComments } from "../../Redux/actions/commentAction";
-import { connect } from "react-redux";
 
-const PostComments = props => {
-  const {
-    recentComments,
-    commentCount,
-    loadingComments,
-    postId,
-    getComments,
-    commentShown
-  } = props;
+const PostComments = ({ getComments, postId, commentCount, post }) => {
+  const { comments } = post;
+
+  const [commentShown, setcommentShown] = useState(3);
+  const [isMoreComments, setIsMoreComments] = useState(null);
 
   useEffect(() => {
     // getComments(postId, commentShown);
@@ -21,38 +15,25 @@ const PostComments = props => {
   }, []);
 
   const handleClick = async () => {
-    getComments(postId, 3, commentShown);
+    getComments(postId, commentShown + 5);
+    if (commentCount <= commentShown + 5) {
+      setIsMoreComments(false);
+    }
+    setcommentShown(num => num + 5);
   };
 
   return (
     <div>
-      {loadingComments === true || loadingComments === null ? (
-        <p className='show-comments'>Loading...</p>
-      ) : (
-        commentCount > commentShown && (
-          <p className='show-comments' onClick={handleClick}>
-            View more
-          </p>
-        )
+      {isMoreComments && (
+        <p className='show-comments' onClick={handleClick}>
+          View more
+        </p>
       )}
-      {recentComments.map((comment, index) => {
-        // if (index < commentShown)
-        return <PostCommentItem key={comment._id} comment={comment} />;
-      })}
+      {comments.map(comment => (
+        <PostCommentItem key={comment._id} comment={comment} />
+      ))}
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  recentComments: state.comment.recentComments,
-  commentCount: state.comment.commentCount,
-  loadingComments: state.comment.loadingComments,
-  commentShown: state.comment.commentShown
-});
-
-const mapDispatchToProps = dispatch => ({
-  getComments: (postId, commentsToFetch, commonShown) =>
-    dispatch(getComments(postId, commentsToFetch, commonShown))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostComments);
+export default PostComments;
