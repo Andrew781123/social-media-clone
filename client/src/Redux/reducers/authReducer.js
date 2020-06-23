@@ -1,7 +1,7 @@
 const initialState = {
   isAuth: null,
   loading: null,
-  user: { username: null, headColor: "white", bodyColor: "blue" }
+  user: { username: null, icon: { headColor: "white", bodyColor: "blue" } }
 };
 
 const authReducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuth: true,
-        user: action.payload,
+        user: { ...state.user, ...action.payload },
         loading: false
       };
     }
@@ -30,20 +30,26 @@ const authReducer = (state = initialState, action) => {
     case "UPDATE_BODY_COLOR": {
       return {
         ...state,
-        user: { ...state.user, bodyColor: action.payload }
+        user: {
+          ...state.user,
+          icon: { ...state.user.icon, bodyColor: action.payload }
+        }
       };
     }
     case "UPDATE_HEAD_COLOR": {
       return {
         ...state,
-        user: { ...state.user, headColor: action.payload }
+        user: {
+          ...state.user,
+          icon: { ...state.user.icon, headColor: action.payload }
+        }
       };
     }
-    case "UPDATE_USER": {
+    case "EDIT_USER": {
       return {
         ...state,
         loading: false,
-        user: action.payload
+        user: { ...state.user, ...action.payload }
       };
     }
     case "CREATE_USER": {

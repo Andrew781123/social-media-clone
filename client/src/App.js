@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Navbar from "./layout/Navbar";
 import Login from "./auth/Login";
 import NewUser from "./components/user/NewUser";
+import EditUser from "./components/user/EditUser";
 import PrivateRoute from "./PrivateRoute";
 import LoginSuccess from "./auth/LoginSuccess";
 import { Provider } from "react-redux";
@@ -30,7 +31,7 @@ const App = () => {
           />
           <Route exact path='/auth/login/success' component={LoginSuccess} />
           <Route exact path='/newUser' component={NewUser} />
-          <Route exact path='/users/:id/edit' component={() => <NewUser />} />
+          <Route exact path='/users/:id/edit' component={EditUser} />
         </Switch>
       </Router>
     </Provider>

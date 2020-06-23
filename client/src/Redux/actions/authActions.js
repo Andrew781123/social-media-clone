@@ -26,24 +26,6 @@ export const updateBodyColor = bodyColor => {
   };
 };
 
-export const updateUser = user => async dispatch => {
-  try {
-    dispatch({ type: "SET_LOADING" });
-    const res = await axios({
-      method: "PATCH",
-      url: `/api/users/${user.userId}`,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: user
-    });
-
-    dispatch({ type: "UPDATE_USER", payload: res.data });
-  } catch (err) {
-    console.error(err);
-  }
-};
-
 export const createUser = user => async dispatch => {
   try {
     dispatch({ type: "SET_LOADING" });
@@ -57,6 +39,24 @@ export const createUser = user => async dispatch => {
     });
 
     dispatch({ type: "CREATE_USER", payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const editUser = user => async dispatch => {
+  try {
+    dispatch({ type: "SET_LOADING" });
+    const res = await axios({
+      method: "PATCH",
+      url: `/api/users/${user.userId}`,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: user
+    });
+
+    dispatch({ type: "EDIT_USER", payload: res.data });
   } catch (err) {
     console.error(err);
   }

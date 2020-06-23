@@ -6,12 +6,12 @@ const { TempUser } = require("../model/tempUser");
 
 //create user
 router.post("/", async (req, res) => {
-  const { username, tempUserId, headColor, bodyColor } = req.body;
+  const { username, userId, headColor, bodyColor } = req.body;
   console.log(headColor, bodyColor);
 
   try {
     //get tempUser
-    const tempUser = await TempUser.findById(tempUserId);
+    const tempUser = await TempUser.findById(userId);
     console.log(tempUser);
     //check if user already exists
     const user = await User.findOne({ username });
