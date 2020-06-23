@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UserForm from "./UserForm";
 import { connect } from "react-redux";
-import { editUser } from "../../Redux/actions/authActions";
+import { editUser, cancelIconEdit } from "../../Redux/actions/authActions";
 
 const EditUser = props => {
-  const { user, editUser } = props;
+  const { user, editUser, cancelIconEdit } = props;
+
+  const [initialIcon, setInitialIcon] = useState({
+    headColor: "",
+    bodyColor: ""
+  });
+
+  useEffect(() => {
+    setInitialIcon({ ...user.icon });
+  }, []);
+
+  const handleCancel = () => {
+    cancelIconEdit(initialIcon);
+    props.history.push("/");
+  };
 
   return (
     <div className='new-user-form-container'>
@@ -16,6 +30,8 @@ const EditUser = props => {
         bodyColor={user.icon.bodyColor}
         action={editUser}
         history={props.history}
+        isCancel={true}
+        handleCancel={handleCancel}
       />
     </div>
   );
@@ -26,7 +42,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  editUser: user => dispatch(editUser(user))
+  editUser: user => dispatch(editUser(user)),
+  cancelIconEdit: icon => dispatch(cancelIconEdit(icon))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditUser);

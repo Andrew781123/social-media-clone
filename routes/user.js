@@ -60,6 +60,7 @@ router.patch("/:id", async (req, res) => {
       return res.status(404).json({ message: "user not found" });
 
     for (let field in req.body) {
+      //to do:  if edit field not in basic_user
       user[field] = req.body[field];
       userDetail[field] = req.body[field];
     }

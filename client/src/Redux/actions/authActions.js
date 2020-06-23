@@ -61,3 +61,10 @@ export const editUser = user => async dispatch => {
     console.error(err);
   }
 };
+
+export const cancelIconEdit = icon => {
+  return {
+    type: "CANCEL_EDIT_ICON",
+    payload: icon
+  };
+};

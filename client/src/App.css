@@ -263,14 +263,29 @@ nav > ul > li {
   align-self: flex-start;
 }
 
-.new-user-form-container > form > button {
+.new-user-form-container .buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.new-user-form-container form .submit-button,
+.new-user-form-container form .cancel-button {
   color: black;
   font-size: 1.3rem;
-  background-color: rgb(15, 255, 15);
   padding: 0.6rem;
   border-radius: 0.5rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
+}
+
+.new-user-form-container form .submit-button {
+  background-color: rgb(15, 255, 15);
+}
+
+.new-user-form-container form .cancel-button {
+  background-color: rgb(250, 116, 62);
 }
 
 .user-icon-dropdown {
@@ -332,6 +347,7 @@ nav > ul > li {
   min-height: 5em;
   margin-top: 0.5em;
   color: var(--primary-color);
+  white-space: pre-wrap;
 }
 
 .post-item-data {

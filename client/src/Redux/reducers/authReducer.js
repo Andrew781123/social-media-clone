@@ -59,6 +59,12 @@ const authReducer = (state = initialState, action) => {
         user: action.payload
       };
     }
+    case "CANCEL_EDIT_ICON": {
+      return {
+        ...state,
+        user: { ...state.user, icon: action.payload }
+      };
+    }
     default:
       return state;
   }

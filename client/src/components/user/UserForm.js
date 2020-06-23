@@ -10,7 +10,9 @@ const UserForm = props => {
     action,
     title,
     history,
-    userId
+    userId,
+    isCancel,
+    handleCancel
   } = props;
 
   const [newUser, setUser] = useState({
@@ -40,7 +42,6 @@ const UserForm = props => {
         bodyColor: bodyColor
       }
     };
-    console.log(`userTosave: ${userToSave}`);
     action(userToSave);
     history.push("/");
   };
@@ -63,7 +64,17 @@ const UserForm = props => {
         <Customize />
       </div>
 
-      <button type='submit'>Next</button>
+      <div className='buttons'>
+        {isCancel && (
+          <button className='cancel-button' onClick={() => handleCancel()}>
+            Cancel
+          </button>
+        )}
+
+        <button className='submit-button' type='submit'>
+          Next
+        </button>
+      </div>
     </form>
   );
 };
