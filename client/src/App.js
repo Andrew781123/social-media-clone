@@ -31,7 +31,7 @@ const App = () => {
           />
           <Route exact path='/auth/login/success' component={LoginSuccess} />
           <Route exact path='/newUser' component={NewUser} />
-          <Route exact path='/users/:id/edit' component={EditUser} />
+          <PrivateRoute exact path='/users/:id/edit' component={EditUser} />
         </Switch>
       </Router>
     </Provider>

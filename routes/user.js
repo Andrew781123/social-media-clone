@@ -3,6 +3,8 @@ const router = express.Router();
 const { User } = require("../model/user");
 const { UserDetail } = require("../model/userDetail");
 const { TempUser } = require("../model/tempUser");
+const { Post } = require("../model/post");
+const { Comment } = require("../model/comment");
 
 //create user
 router.post("/", async (req, res) => {
@@ -52,6 +54,8 @@ router.post("/", async (req, res) => {
 });
 
 router.patch("/:id", async (req, res) => {
+  const { username, icon } = req.body;
+
   try {
     const user = await User.findById(req.params.id);
     const userDetail = await UserDetail.findOne({ user: req.params.id });
@@ -67,6 +71,19 @@ router.patch("/:id", async (req, res) => {
 
     const savedUser = await user.save();
     await userDetail.save();
+
+    //update post of that user
+    await Post.updateMany(
+      { "user._id": req.params.id },
+      { "user.username": username, "user.icon": icon }
+    );
+
+    //update comments of that user
+    await Comment.updateMany(
+      { "user._id": req.params.id },
+      { "user.username": username, "user.icon": icon }
+    );
+
     res.status(200).json(savedUser);
   } catch (err) {
     console.error(err);
