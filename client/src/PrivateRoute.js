@@ -7,7 +7,6 @@ const PrivateRoute = ({
   auth: { isAuth, loading },
   ...rest
 }) => {
-  console.log("in private route");
   return (
     <Route
       {...rest}

@@ -14,7 +14,6 @@ import store from "./Redux/store";
 import { loadUser } from "./Redux/actions/authActions";
 
 const App = () => {
-  console.log("in app");
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);

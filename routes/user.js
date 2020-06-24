@@ -91,4 +91,14 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+router.get("/usernames", async (req, res) => {
+  try {
+    const usernames = await User.find().select("username icon");
+    res.status(200).json(usernames);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 module.exports = router;
