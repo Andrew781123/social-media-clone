@@ -14,6 +14,7 @@ import store from "./Redux/store";
 import { loadUser } from "./Redux/actions/authActions";
 
 const App = () => {
+  console.log("in app");
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
@@ -31,7 +32,7 @@ const App = () => {
           />
           <Route exact path='/auth/login/success' component={LoginSuccess} />
           <Route exact path='/newUser' component={NewUser} />
-          <PrivateRoute exact path='/users/:id/edit' component={EditUser} />
+          <Route exact path='/users/:id/edit' component={EditUser} />
         </Switch>
       </Router>
     </Provider>

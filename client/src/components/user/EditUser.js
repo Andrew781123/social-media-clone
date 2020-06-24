@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { editUser, cancelIconEdit } from "../../Redux/actions/authActions";
 
 const EditUser = props => {
-  const { user, editUser, cancelIconEdit } = props;
+  const { user, editUser, cancelIconEdit, loading } = props;
 
   const [initialIcon, setInitialIcon] = useState({
     headColor: "",
@@ -12,8 +12,9 @@ const EditUser = props => {
   });
 
   useEffect(() => {
+    //set initialIcon after user is loaded
     setInitialIcon({ ...user.icon });
-  }, []);
+  }, [loading]);
 
   const handleCancel = () => {
     cancelIconEdit(initialIcon);
@@ -22,22 +23,25 @@ const EditUser = props => {
 
   return (
     <div className='new-user-form-container'>
-      <UserForm
-        title='Edit Profile'
-        userId={user._id.toString()}
-        username={user.username}
-        headColor={user.icon.headColor}
-        bodyColor={user.icon.bodyColor}
-        action={editUser}
-        history={props.history}
-        isCancel={true}
-        handleCancel={handleCancel}
-      />
+      {loading === false && (
+        <UserForm
+          title='Edit Profile'
+          userId={user._id.toString()}
+          username={user.username}
+          headColor={user.icon.headColor}
+          bodyColor={user.icon.bodyColor}
+          action={editUser}
+          history={props.history}
+          isCancel={true}
+          handleCancel={handleCancel}
+        />
+      )}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
+  loading: state.auth.loading,
   user: state.auth.user
 });
 
