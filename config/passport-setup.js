@@ -23,7 +23,7 @@ passport.use(
         return done(null, tempUser);
       }
       const newUser = await createUser(id);
-      console.log("shouldnt here");
+      console.log("first time");
       done(null, newUser);
     }
   )

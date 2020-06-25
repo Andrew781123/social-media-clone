@@ -14,10 +14,9 @@ router.post("/", async (req, res) => {
   try {
     //get tempUser
     const tempUser = await TempUser.findById(userId);
-    console.log(tempUser);
+    console.log(`tempUser: ${tempUser}`);
     //check if user already exists
     const user = await User.findOne({ username });
-    console.log(user);
     if (user) {
       return res.status(400).json({ message: "Username has been registered" });
     }
