@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== "production") require("dotenv").config();
 const express = require("express");
 const app = express();
 require("./config/passport-setup");
+const path = require("path");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
@@ -36,6 +37,14 @@ app.use("/api/posts", postRouter);
 
 const authRouter = require("./routes/auth");
 app.use("/api/auth", authRouter);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 
