@@ -19,6 +19,9 @@ passport.use(
       if (user) {
         return done(null, user);
       }
+      if (temUser) {
+        return done(null, tempUser);
+      }
       const newUser = await createUser(id);
       console.log("shouldnt here");
       done(null, newUser);
