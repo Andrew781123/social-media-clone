@@ -16,8 +16,19 @@ router.get(
 
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   if (typeof req.user.username === "undefined") {
-    res.redirect(`http://localhost:3000/newUser?id=${req.user._id.toString()}`);
-  } else res.redirect("http://localhost:3000/");
+    if (process.env.NODE_ENV !== "production")
+      res.redirect(
+        `http://localhost:3000/newUser?id=${req.user._id.toString()}`
+      );
+    else
+      res.redirect(
+        `https://fakes-book.herokuapp.com/newUser?id=${req.user._id.toString()}`
+      );
+  } else {
+    if (process.env.NODE_ENV !== "production")
+      res.redirect("http://localhost:3000/");
+    else res.redirect("https://fakes-book.herokuapp.com");
+  }
 });
 
 router.get("/login/success", authroizeUser, (req, res) => {
@@ -26,7 +37,10 @@ router.get("/login/success", authroizeUser, (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("http://localhost:3000/auth/login");
+  if (process.env.NODE_ENV !== "production")
+    res.redirect("http://localhost:3000/auth/login");
+  else
+    res.redirect(res.redirect("https://fakes-book.herokuapp.com/auth/login"));
 });
 
 module.exports = router;
