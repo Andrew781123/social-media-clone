@@ -14,7 +14,6 @@ passport.use(
       const { id, displayName } = profile;
 
       const user = await User.findOne({ googleId: id });
-      console.log(user);
       const tempUser = await TempUser.findOne({ googleId: id });
       if (user) {
         return done(null, user);
@@ -23,21 +22,20 @@ passport.use(
         return done(null, tempUser);
       }
       const newUser = await createUser(id);
-      console.log("first time");
       done(null, newUser);
     }
   )
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.googleId);
 });
 
 passport.deserializeUser(async (id, done) => {
   let user;
-  user = await User.findById(id);
+  user = await User.findOne({ googleId: id });
   if (!user) {
-    user = await TempUser.findById(id);
+    user = await TempUser.findOne({ googleId: id });
   }
   done(null, user);
 });

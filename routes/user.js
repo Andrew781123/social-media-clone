@@ -8,13 +8,15 @@ const { Comment } = require("../model/comment");
 
 //create user
 router.post("/", async (req, res) => {
-  const { username, userId, headColor, bodyColor } = req.body;
-  console.log(headColor, bodyColor);
+  const {
+    username,
+    userId,
+    icon: { headColor, bodyColor }
+  } = req.body;
 
   try {
     //get tempUser
     const tempUser = await TempUser.findById(userId);
-    console.log(`tempUser: ${tempUser}`);
     //check if user already exists
     const user = await User.findOne({ username });
     if (user) {

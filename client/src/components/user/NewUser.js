@@ -15,6 +15,7 @@ const NewUser = props => {
         headColor={user.icon.headColor}
         bodyColor={user.icon.bodyColor}
         action={createUser}
+        history={props.history}
       />
     </div>
   );
