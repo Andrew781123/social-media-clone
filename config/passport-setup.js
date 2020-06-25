@@ -19,7 +19,7 @@ passport.use(
       if (user) {
         return done(null, user);
       }
-      if (temUser) {
+      if (tempUser) {
         return done(null, tempUser);
       }
       const newUser = await createUser(id);
