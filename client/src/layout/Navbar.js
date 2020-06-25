@@ -5,7 +5,7 @@ import UserIcon from "../components/user/UserIcon";
 import UserIconDropdown from "../components/user/UserIconDropdown";
 
 const handleLogout = () => {
-  window.open("http://localhost:5000/api/auth/logout", "_self");
+  window.open("https://fakes-book.herokuapp.com/api/auth/logout", "_self");
 };
 
 const handleUserIconClick = (showDropdown, setShowDropdown) => {

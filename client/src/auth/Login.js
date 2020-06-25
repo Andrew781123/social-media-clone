@@ -2,7 +2,8 @@ import React from "react";
 import GoogleButton from "react-google-button";
 
 const handleAuth = async () => {
-  window.open("http://localhost:5000/api/auth/google", "_self");
+  if (process.env.NODE_ENV)
+    window.open("https://fakes-book.herokuapp.com/api/auth/google", "_self");
 };
 
 const Login = () => {
