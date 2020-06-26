@@ -112,12 +112,13 @@ nav > ul > li {
 /* Posts */
 
 .posts-container {
-  width: 60%;
+  width: 95%;
+  max-width: 600px;
   margin: auto;
 }
 
 .post-form-container {
-  width: 100%;
+  width: 95%;
   max-width: 600px;
   margin: auto;
   margin-top: 1em;
