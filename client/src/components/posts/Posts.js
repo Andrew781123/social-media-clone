@@ -58,7 +58,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getPost: () => dispatch(getPost()),
   incLike: (currentUserId, postId) => dispatch(incLike(currentUserId, postId)),
-  decLike: (currentUserId, postId) => dispatch(decLike(currentUserId, postId)),
+  decLike: (currentUserId, postId, post) =>
+    dispatch(decLike(currentUserId, postId, post)),
   addComment: (username, postId, comment) =>
     dispatch(addComment(username, postId, comment)),
   getComments: (postId, skip, commentNum) =>

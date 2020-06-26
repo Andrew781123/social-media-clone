@@ -50,7 +50,6 @@ const PostCommentForm = ({ addComment, postId, user }) => {
         setTagUser(tagUser => {
           return {
             ...tagUser,
-            loading: true,
             searchParams: regex,
             matchUsers: usersMatch,
             loading: false

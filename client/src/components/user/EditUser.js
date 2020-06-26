@@ -14,7 +14,7 @@ const EditUser = props => {
   useEffect(() => {
     //set initialIcon after user is loaded
     setInitialIcon({ ...user.icon });
-  }, [loading]);
+  }, [loading, user.icon]);
 
   const handleCancel = () => {
     cancelIconEdit(initialIcon);

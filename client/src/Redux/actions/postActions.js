@@ -40,41 +40,16 @@ export const createPost = (post, user) => async dispatch => {
   }
 };
 
-export const incLike = (currentUserId, postId) => async dispatch => {
-  try {
-    const res = await axios({
-      method: "POST",
-      url: `/api/posts/${postId}/likes/?type=increment`,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: {
-        userId: currentUserId
-      }
-    });
-    dispatch({ type: "INC_LIKE", payload: { ...res.data } });
-  } catch (err) {
-    console.error(err);
-  }
+export const incLike = (currentUserId, postId) => {
+  return { type: "INC_LIKE", payload: { postId, userId: currentUserId } };
 };
 
-export const decLike = (currentUserId, postId) => async dispatch => {
-  try {
-    const res = await axios({
-      method: "POST",
-      url: `/api/posts/${postId}/likes/?type=decrement`,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: {
-        userId: currentUserId
-      }
-    });
-
-    dispatch({ type: "DEC_LIKE", payload: res.data });
-  } catch (err) {
-    console.error(err);
-  }
+export const decLike = (currentUserId, postId, post) => {
+  const newLikes = post.likes.filter(id => id !== currentUserId);
+  return {
+    type: "DEC_LIKE",
+    payload: { postId, newLikes }
+  };
 };
 
 export const getComments = (postId, skip, commentNum) => async dispatch => {

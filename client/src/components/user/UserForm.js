@@ -42,9 +42,7 @@ const UserForm = props => {
         bodyColor: bodyColor
       }
     };
-    console.log(
-      `headColor: ${userToSave.icon.headColor}, bodyColor: ${userToSave.icon.bodyColor}`
-    );
+
     action(userToSave);
     history.push("/");
   };

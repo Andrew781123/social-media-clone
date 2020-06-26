@@ -12,7 +12,6 @@ export const loadUser = () => async dispatch => {
 };
 
 export const updateHeadColor = headColor => {
-  console.log(headColor);
   return {
     type: "UPDATE_HEAD_COLOR",
     payload: headColor

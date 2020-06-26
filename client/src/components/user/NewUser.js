@@ -5,7 +5,6 @@ import { createUser } from "../../Redux/actions/authActions";
 
 const NewUser = props => {
   const { user, createUser } = props;
-  console.log(`user state: ${user}`);
 
   return (
     <div className='new-user-form-container'>

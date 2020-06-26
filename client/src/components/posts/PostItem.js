@@ -3,6 +3,7 @@ import UserIcon from "../user/UserIcon";
 import PostCommentForm from "./PostCommentForm";
 import PostComments from "./PostComments";
 import CreatedTime from "./CreatedTime";
+import axios from "axios";
 
 const PostItem = ({
   post,
@@ -28,9 +29,40 @@ const PostItem = ({
     else setIsLiked(false);
   }, [post, currentUserId]);
 
-  const handleLike = () => {
-    if (isLiked === true) decLike(currentUserId, post._id.toString());
-    else incLike(currentUserId, post._id.toString());
+  const handleLike = async () => {
+    if (isLiked === true) {
+      decLike(currentUserId, post._id.toString(), post);
+      try {
+        await axios({
+          method: "POST",
+          url: `/api/posts/${post._id.toString()}/likes/?type=decrement`,
+          headers: {
+            "Content-Type": "application/json"
+          },
+          data: {
+            userId: currentUserId
+          }
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      incLike(currentUserId, post._id.toString());
+      try {
+        await axios({
+          method: "POST",
+          url: `/api/posts/${post._id.toString()}/likes/?type=increment`,
+          headers: {
+            "Content-Type": "application/json"
+          },
+          data: {
+            userId: currentUserId
+          }
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }
   };
 
   return (
