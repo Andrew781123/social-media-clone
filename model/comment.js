@@ -28,9 +28,9 @@ const commentSchema = new mongoose.Schema(
 
 commentSchema.virtual("formattedCreatedAt").get(function () {
   let displayTime = this.createdAt;
-  if (moment(this.time).utcOffset() == -0) {
+  if (moment(this.createdAt).utcOffset() == -0) {
     // for server
-    displayTime = moment(this.time).add(8, "h");
+    displayTime = moment(this.createdAt).add(8, "h");
   }
   return moment(displayTime).format("DD MMM, H:mm");
 });
