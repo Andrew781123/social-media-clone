@@ -13,8 +13,14 @@ export const getPost = () => async dispatch => {
   }
 };
 
+export const removePreviousNewPosts = () => {
+  return {
+    type: "REMOVE_PREVIOUS_NEW_POSTS"
+  };
+};
+
 export const createPost = (post, user) => async dispatch => {
-  dispatch({ type: "SET_POST_LOADING" });
+  dispatch({ type: "SET_NEWPOST_LOADING" });
   const { content, type } = post;
   let isPublic;
   if (type === "public") isPublic = true;

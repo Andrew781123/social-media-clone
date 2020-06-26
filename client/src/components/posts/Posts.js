@@ -6,7 +6,8 @@ import {
   incLike,
   decLike,
   addComment,
-  getComments
+  getComments,
+  removePreviousNewPosts
 } from "../../Redux/actions/postActions";
 
 const Posts = ({
@@ -18,17 +19,33 @@ const Posts = ({
   addComment,
   getComments
 }) => {
-  const { posts, loading, comments } = post;
+  const { posts, loading, comments, newPosts, loadingNewPost } = post;
   const { user } = auth;
   const { _id } = user;
 
   useEffect(() => {
     getPost();
+    removePreviousNewPosts();
     //  eslint-disable-next-line
   }, []);
 
   return (
     <div className='posts-container'>
+      {newPosts.length > 0 &&
+        loadingNewPost === false &&
+        newPosts.map(post => (
+          <PostItem
+            key={post._id.toString()}
+            post={post}
+            currentUserId={_id.toString()}
+            incLike={incLike}
+            decLike={decLike}
+            addComment={addComment}
+            user={user}
+            comments={comments}
+            getComments={getComments}
+          />
+        ))}
       {loading === false ? (
         posts.map(post => (
           <PostItem
@@ -63,7 +80,8 @@ const mapDispatchToProps = dispatch => ({
   addComment: (username, postId, comment) =>
     dispatch(addComment(username, postId, comment)),
   getComments: (postId, skip, commentNum) =>
-    dispatch(getComments(postId, skip, commentNum))
+    dispatch(getComments(postId, skip, commentNum)),
+  removePreviousNewPosts: () => dispatch(removePreviousNewPosts())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

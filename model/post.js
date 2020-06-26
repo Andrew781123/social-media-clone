@@ -27,6 +27,7 @@ const postSchema = new mongoose.Schema(
     },
 
     priority: {
+      type: Number,
       default: 0
     },
 

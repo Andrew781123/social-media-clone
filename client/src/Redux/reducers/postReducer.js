@@ -1,23 +1,47 @@
 const initialState = {
   posts: [],
+  newPosts: [],
   loading: null,
+  loadingNewPost: null,
   loadingComments: null
 };
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_POST": {
+      console.log("getting posts");
       return {
         ...state,
         posts: action.payload,
         loading: false
       };
     }
+    // case "CREATE_POST": {
+    //   const pinnedPosts = state.posts.filter(post => post.priority > 0);
+    //   const notPinnedPosts = state.posts.filter(post => post.priority === 0);
+    //   return {
+    //     ...state,
+    //     posts: [...pinnedPosts, action.payload, ...notPinnedPosts],
+    //     loading: false
+    //   };
+    // }
     case "CREATE_POST": {
       return {
         ...state,
-        posts: [action.payload, ...state.posts],
-        loading: false
+        loadingNewPost: false,
+        newPosts: [action.payload, ...state.newPosts]
+      };
+    }
+    case "REMOVE_PREVIOUS_NEW_POSTS": {
+      return {
+        ...state,
+        newPosts: {}
+      };
+    }
+    case "SET_NEWPOST_LOADING": {
+      return {
+        ...state,
+        loadingNewPost: true
       };
     }
     case "SET_POST_LOADING": {
