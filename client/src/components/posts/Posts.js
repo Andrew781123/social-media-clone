@@ -31,21 +31,22 @@ const Posts = ({
 
   return (
     <div className='posts-container'>
-      {newPosts.length > 0 &&
-        loadingNewPost === false &&
-        newPosts.map(post => (
-          <PostItem
-            key={post._id.toString()}
-            post={post}
-            currentUserId={_id.toString()}
-            incLike={incLike}
-            decLike={decLike}
-            addComment={addComment}
-            user={user}
-            comments={comments}
-            getComments={getComments}
-          />
-        ))}
+      {newPosts.length > 0 && loadingNewPost === false
+        ? newPosts.map(post => (
+            <PostItem
+              key={post._id.toString()}
+              post={post}
+              currentUserId={_id.toString()}
+              incLike={incLike}
+              decLike={decLike}
+              addComment={addComment}
+              user={user}
+              comments={comments}
+              getComments={getComments}
+            />
+          ))
+        : newPosts.length > 0 &&
+          loadingNewPost === true && <h2>Posting new post...</h2>}
       {loading === false ? (
         posts.map(post => (
           <PostItem
