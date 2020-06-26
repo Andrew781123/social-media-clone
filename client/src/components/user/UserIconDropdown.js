@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const UserIconDropdown = props => {
-  const { handleLogout, userId } = props;
+  const { handleLogout, userId, setShowDropdown } = props;
 
   return (
     <div className='user-icon-dropdown'>
@@ -10,7 +10,11 @@ const UserIconDropdown = props => {
         <Link to='/users/:id' className='dropdown-link'>
           View
         </Link>
-        <Link to={`/users/${userId}/edit`} className='dropdown-link'>
+        <Link
+          to={`/users/${userId}/edit`}
+          className='dropdown-link'
+          onClick={() => setShowDropdown(false)}
+        >
           Edit
         </Link>
         <Link to='' className='dropdown-link' onClick={handleLogout}>

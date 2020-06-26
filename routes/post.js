@@ -8,7 +8,9 @@ const { Comment } = require("../model/comment");
 
 router.get("/", async (req, res) => {
   try {
-    const posts = await Post.find().sort({ createdAt: -1 }).exec();
+    const posts = await Post.find()
+      .sort({ priority: -1, createdAt: -1 })
+      .exec();
     //sort comments
 
     //get commentCount

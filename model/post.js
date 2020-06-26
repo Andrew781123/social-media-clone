@@ -26,6 +26,10 @@ const postSchema = new mongoose.Schema(
       }
     },
 
+    priority: {
+      default: 0
+    },
+
     likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
