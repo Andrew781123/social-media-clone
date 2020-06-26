@@ -57,33 +57,74 @@ const postReducer = (state = initialState, action) => {
       };
     }
     case "INC_LIKE": {
-      return {
-        ...state,
-        posts: state.posts.map(post => {
-          if (post._id.toString() === action.payload.postId) {
-            return {
-              ...post,
-              likeCount: post.likes.length + 1,
-              likes: [...post.likes, action.payload.userId]
-            };
-          } else return post;
-        })
-      };
+      let isNewPost = null;
+      const post = state.posts.find(
+        post => post._id.toString() === action.payload.postId
+      );
+      if (!post) isNewPost = true;
+      else isNewPost = false;
+      if (isNewPost) {
+        return {
+          ...state,
+          newPosts: state.newPosts.map(post => {
+            if (post._id.toString() === action.payload.postId)
+              return {
+                ...post,
+                likeCount: post.likes.length + 1,
+                likes: [...post.likes, action.payload.userId]
+              };
+          })
+        };
+      } else if (isNewPost === false) {
+        return {
+          ...state,
+          posts: state.posts.map(post => {
+            if (post._id.toString() === action.payload.postId) {
+              return {
+                ...post,
+                likeCount: post.likes.length + 1,
+                likes: [...post.likes, action.payload.userId]
+              };
+            } else return post;
+          })
+        };
+      }
     }
 
     case "DEC_LIKE": {
-      return {
-        ...state,
-        posts: state.posts.map(post => {
-          if (post._id.toString() === action.payload.postId) {
-            return {
-              ...post,
-              likeCount: post.likes.length - 1,
-              likes: action.payload.newLikes
-            };
-          } else return post;
-        })
-      };
+      let isNewPost = null;
+      const post = state.posts.find(
+        post => post._id.toString() === action.payload.postId
+      );
+      if (!post) isNewPost = true;
+      else isNewPost = false;
+      if (isNewPost) {
+        return {
+          ...state,
+          newPosts: state.newPosts.map(post => {
+            if (post._id.toString() === action.payload.postId) {
+              return {
+                ...post,
+                likeCount: post.likes.length - 1,
+                likes: action.payload.newLikes
+              };
+            }
+          })
+        };
+      } else if (isNewPost === false) {
+        return {
+          ...state,
+          posts: state.posts.map(post => {
+            if (post._id.toString() === action.payload.postId) {
+              return {
+                ...post,
+                likeCount: post.likes.length - 1,
+                likes: action.payload.newLikes
+              };
+            } else return post;
+          })
+        };
+      }
     }
 
     case "GET_COMMENTS": {
