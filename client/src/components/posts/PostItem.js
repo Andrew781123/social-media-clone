@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import UserIcon from "../user/UserIcon";
-import PostContentInput from "./PostContentInput";
 import PostForm from "./PostForm";
 import PostCommentForm from "./PostCommentForm";
 import PostComments from "./PostComments";
