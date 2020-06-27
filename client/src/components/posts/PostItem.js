@@ -5,7 +5,7 @@ import PostComments from "./PostComments";
 import CreatedTime from "./CreatedTime";
 import axios from "axios";
 
-const PostItem = ({ post, currentUserId, incLike, decLike, user }) => {
+const PostItem = ({ post, currentUserId, incLike, decLike }) => {
   const [isLiked, setIsLiked] = useState(null);
 
   useEffect(() => {

@@ -1,8 +1,16 @@
 import React from "react";
 import UserIcon from "../user/UserIcon";
 
-const TagUserItem = ({ user, addTag }) => {
-  const handleClick = () => addTag(user.username);
+const TagUserItem = ({ user, addTag, setTagUser }) => {
+  const handleClick = () => {
+    addTag(user.username);
+    setTagUser(tagUser => {
+      return {
+        ...tagUser,
+        isTag: false
+      };
+    });
+  };
 
   return (
     <div className='tag-users-item' onClick={handleClick}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PostCommentItem from "./PostCommentItem";
 import { connect } from "react-redux";
-import { addComment, getComments } from "../../Redux/actions/postActions";
+import { getComments } from "../../Redux/actions/postActions";
 
 let commentNum = 3;
 

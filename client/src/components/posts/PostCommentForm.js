@@ -13,7 +13,7 @@ const intialTagUser = {
   input: ""
 };
 
-const PostCommentForm = ({ addComment, postId, user }) => {
+const PostCommentForm = ({ addComment, postId, user, loadingNewComment }) => {
   const [input, setInput] = useState("");
   const [tagUser, setTagUser] = useState(intialTagUser);
 
@@ -100,6 +100,11 @@ const PostCommentForm = ({ addComment, postId, user }) => {
 
   return (
     <>
+      {loadingNewComment && (
+        <h2 style={{ color: "white", fontSize: ".8rem" }}>
+          Posting comment...
+        </h2>
+      )}
       <form onSubmit={handleSubmit}>
         <input
           type='text'
@@ -109,11 +114,12 @@ const PostCommentForm = ({ addComment, postId, user }) => {
           onChange={handleChange}
         />
       </form>
-      {tagUser.loading === false && (
+      {tagUser.loading === false && tagUser.isTag === true && (
         <TagUsers
           key={user._id.toString()}
           users={tagUser.matchUsers}
           addTag={addTag}
+          setTagUser={setTagUser}
         />
       )}
     </>
@@ -122,7 +128,8 @@ const PostCommentForm = ({ addComment, postId, user }) => {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    loadingNewComment: state.post.loadingNewComment
   };
 };
 

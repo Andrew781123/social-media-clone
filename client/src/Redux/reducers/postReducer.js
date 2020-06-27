@@ -2,7 +2,8 @@ const initialState = {
   posts: [],
   loading: null,
   loadingNewPost: null,
-  loadingComments: null
+  loadingComments: null,
+  loadingNewComment: null
 };
 
 const postReducer = (state = initialState, action) => {
@@ -55,6 +56,12 @@ const postReducer = (state = initialState, action) => {
         loadingComments: true
       };
     }
+    case "SET_NEW_COMMENT_LOADING": {
+      return {
+        ...state,
+        loadingNewComment: true
+      };
+    }
     case "INC_LIKE": {
       return {
         ...state,
@@ -102,6 +109,7 @@ const postReducer = (state = initialState, action) => {
     case "ADD_COMMENT": {
       return {
         ...state,
+        loadingNewComment: false,
         posts: state.posts.map(post => {
           if (post._id.toString() === action.payload.postId)
             return {

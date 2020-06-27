@@ -78,6 +78,7 @@ export const getComments = (postId, skip, commentNum) => async dispatch => {
 };
 
 export const addComment = (user, postId, comment) => async dispatch => {
+  dispatch({ type: "SET_NEW_COMMENT_LOADING" });
   try {
     const res = await axios({
       method: "POST",
