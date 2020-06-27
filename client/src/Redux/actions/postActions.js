@@ -46,6 +46,23 @@ export const createPost = (post, user) => async dispatch => {
   }
 };
 
+export const editPost = (postId, newPost) => async dispatch => {
+  try {
+    const res = await axios({
+      method: "PATCH",
+      url: `/api/posts/${postId}`,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: newPost
+    });
+
+    dispatch({ type: "EDIT_POST", payload: { postId, newPost: res.data } });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const incLike = (currentUserId, postId) => {
   return { type: "INC_LIKE", payload: { postId, userId: currentUserId } };
 };

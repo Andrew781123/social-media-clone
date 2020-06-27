@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import UserIcon from "../user/UserIcon";
+import PostContentInput from "./PostContentInput";
+import PostForm from "./PostForm";
 import PostCommentForm from "./PostCommentForm";
 import PostComments from "./PostComments";
 import CreatedTime from "./CreatedTime";
 import axios from "axios";
 
-const PostItem = ({ post, currentUserId, incLike, decLike }) => {
+const PostItem = ({ post, currentUserId, incLike, decLike, editPost }) => {
   const [isLiked, setIsLiked] = useState(null);
+  const [edit, setEdit] = useState({
+    isEdit: false,
+    newPost: {
+      content: ""
+    }
+  });
 
   useEffect(() => {
     console.log("postItem rendered");
@@ -57,20 +65,76 @@ const PostItem = ({ post, currentUserId, incLike, decLike }) => {
     }
   };
 
+  const handleEdit = () => {
+    setEdit(edit => {
+      return {
+        ...edit,
+        isEdit: true,
+        newPost: { ...edit.newPost, content: post.content }
+      };
+    });
+  };
+
+  const handlePostContentChange = e => {
+    const { value } = e.target;
+
+    setEdit(edit => {
+      return {
+        ...edit,
+        newPost: { ...edit.newPost, content: value }
+      };
+    });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setEdit(edit => {
+      return {
+        ...edit,
+        isEdit: false
+      };
+    });
+
+    const edittedPost = {
+      content: edit.newPost.content
+    };
+
+    editPost(post._id.toString(), edittedPost);
+  };
+
   return (
     <div className='post-item-container'>
-      <div className='user-info'>
-        <UserIcon
-          size='3.2em'
-          headColor={post.user.icon.headColor}
-          bodyColor={post.user.icon.bodyColor}
-        />
-        <div className='username-and-time'>
-          <p className='post-item-username'>{post.user.username}</p>
-          <CreatedTime createdAt={post.formattedCreatedAt} />
+      <div className='post-item-top'>
+        <div className='user-info'>
+          <UserIcon
+            size='3.2em'
+            headColor={post.user.icon.headColor}
+            bodyColor={post.user.icon.bodyColor}
+          />
+          <div className='username-and-time'>
+            <p className='post-item-username'>{post.user.username}</p>
+            <CreatedTime createdAt={post.formattedCreatedAt} />
+          </div>
+        </div>
+        <div className='post-item-option-buttons'>
+          {post.user._id.toString() === currentUserId && (
+            <button className='post-item-edit-button' onClick={handleEdit}>
+              Edit
+            </button>
+          )}
         </div>
       </div>
-      <p>{post.content}</p>
+      {edit.isEdit ? (
+        <PostForm
+          content={edit.newPost.content}
+          handleChange={handlePostContentChange}
+          handleSubmit={handleSubmit}
+          placeholder='Write somethings to share'
+        />
+      ) : (
+        <p>{post.content}</p>
+      )}
+
       <div className='like-button-and-count'>
         <button
           className={`like-button ${isLiked && "liked"}`}

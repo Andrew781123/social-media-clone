@@ -32,12 +32,17 @@ const postReducer = (state = initialState, action) => {
         posts: [action.payload, ...state.posts]
       };
     }
-    case "REMOVE_PREVIOUS_NEW_POSTS": {
+    case "EDIT_POST": {
       return {
         ...state,
-        newPosts: {}
+        posts: state.posts.map(post => {
+          if (post._id.toString() === action.payload.postId) {
+            return action.payload.newPost;
+          } else return post;
+        })
       };
     }
+
     case "SET_NEWPOST_LOADING": {
       return {
         ...state,

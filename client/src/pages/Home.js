@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { loadUser } from "../Redux/actions/authActions";
-import PostForm from "../components/posts/PostForm";
+import WelcomeBlock from "../components/posts/WelcomeBlock";
 import Posts from "../components/posts/Posts";
 
 const Home = () => {
   return (
     <div className='container'>
-      <PostForm />
+      <WelcomeBlock />
       <Posts />
     </div>
   );
