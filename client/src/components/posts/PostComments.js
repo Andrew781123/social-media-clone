@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import PostCommentItem from "./PostCommentItem";
+import { connect } from "react-redux";
+import { addComment, getComments } from "../../Redux/actions/postActions";
 
 let commentNum = 3;
 
-const PostComments = ({ getComments, postId, commentCount, post }) => {
-  const { comments } = post;
+const PostComments = ({
+  postId,
 
+  getComments,
+  commentCount,
+  comments
+}) => {
   const [commentShown, setcommentShown] = useState(commentNum);
   const [isMoreComments, setIsMoreComments] = useState(null);
 
   useEffect(() => {
-    // getComments(postId, commentShown);
+    // console.log(moreComments);
     if (commentCount <= commentShown) setIsMoreComments(false);
     else setIsMoreComments(true);
     // eslint-disable-next-line
@@ -36,11 +42,27 @@ const PostComments = ({ getComments, postId, commentCount, post }) => {
           View more {`(${commentCount - commentShown})`}
         </p>
       )}
-      {comments.map(comment => (
-        <PostCommentItem key={comment._id} comment={comment} />
-      ))}
+      {comments &&
+        comments.map(comment => (
+          <PostCommentItem key={comment._id} comment={comment} />
+        ))}
     </div>
   );
 };
 
-export default PostComments;
+const mapStateToProps = (state, ownProps) => {
+  const { postId } = ownProps;
+  return {
+    comments: state.post.posts.find(post => post._id.toString() === postId)
+      .comments,
+    commentCount: state.post.posts.find(post => post._id.toString() === postId)
+      .commentCount
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  getComments: (postId, skip, commentNum) =>
+    dispatch(getComments(postId, skip, commentNum))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostComments);

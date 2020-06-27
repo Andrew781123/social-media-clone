@@ -5,48 +5,22 @@ import {
   getPost,
   incLike,
   decLike,
-  addComment,
-  getComments,
-  removePreviousNewPosts
+  addComment
 } from "../../Redux/actions/postActions";
 
-const Posts = ({
-  post,
-  auth,
-  getPost,
-  incLike,
-  decLike,
-  addComment,
-  getComments
-}) => {
-  const { posts, loading, comments, newPosts, loadingNewPost } = post;
+const Posts = ({ post, auth, getPost, incLike, decLike, addComment }) => {
+  const { posts, loading, loadingNewPost } = post;
   const { user } = auth;
   const { _id } = user;
 
   useEffect(() => {
     getPost();
-    removePreviousNewPosts();
     //  eslint-disable-next-line
   }, []);
 
   return (
     <div className='posts-container'>
-      {newPosts.length > 0 && loadingNewPost === false
-        ? newPosts.map(post => (
-            <PostItem
-              key={post._id.toString()}
-              post={post}
-              currentUserId={_id.toString()}
-              incLike={incLike}
-              decLike={decLike}
-              addComment={addComment}
-              user={user}
-              comments={comments}
-              getComments={getComments}
-            />
-          ))
-        : newPosts.length > 0 &&
-          loadingNewPost === true && <h2>Posting new post...</h2>}
+      {loadingNewPost && <h2 className='loading-message'>Posting...</h2>}
       {loading === false ? (
         posts.map(post => (
           <PostItem
@@ -55,14 +29,11 @@ const Posts = ({
             currentUserId={_id.toString()}
             incLike={incLike}
             decLike={decLike}
-            addComment={addComment}
             user={user}
-            comments={comments}
-            getComments={getComments}
           />
         ))
       ) : (
-        <h2>Loading...</h2>
+        <h2 className='loading-message'>Loading...</h2>
       )}
     </div>
   );
@@ -79,10 +50,7 @@ const mapDispatchToProps = dispatch => ({
   decLike: (currentUserId, postId, post) =>
     dispatch(decLike(currentUserId, postId, post)),
   addComment: (username, postId, comment) =>
-    dispatch(addComment(username, postId, comment)),
-  getComments: (postId, skip, commentNum) =>
-    dispatch(getComments(postId, skip, commentNum)),
-  removePreviousNewPosts: () => dispatch(removePreviousNewPosts())
+    dispatch(addComment(username, postId, comment))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

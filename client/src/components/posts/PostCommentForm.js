@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import TagUsers from "./TagUsers";
+import { connect } from "react-redux";
+import { addComment } from "../../Redux/actions/postActions";
 
 const intialTagUser = {
   isTag: false,
@@ -118,4 +120,15 @@ const PostCommentForm = ({ addComment, postId, user }) => {
   );
 };
 
-export default PostCommentForm;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  addComment: (username, postId, comment) =>
+    dispatch(addComment(username, postId, comment))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostCommentForm);

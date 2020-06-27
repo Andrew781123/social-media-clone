@@ -5,19 +5,11 @@ import PostComments from "./PostComments";
 import CreatedTime from "./CreatedTime";
 import axios from "axios";
 
-const PostItem = ({
-  post,
-  currentUserId,
-  incLike,
-  decLike,
-  addComment,
-  user,
-  comments,
-  getComments
-}) => {
+const PostItem = ({ post, currentUserId, incLike, decLike, user }) => {
   const [isLiked, setIsLiked] = useState(null);
 
   useEffect(() => {
+    console.log("postItem rendered");
     let liked = false;
     for (let _id of post.likes) {
       if (_id.toString() === currentUserId) {
@@ -100,18 +92,8 @@ const PostItem = ({
         </small>
       </div>
       <div className='post-comment'>
-        <PostComments
-          comments={comments}
-          postId={post._id.toString()}
-          commentCount={post.commentCount}
-          post={post}
-          getComments={getComments}
-        />
-        <PostCommentForm
-          addComment={addComment}
-          postId={post._id.toString()}
-          user={user}
-        />
+        <PostComments postId={post._id.toString()} />
+        <PostCommentForm postId={post._id.toString()} />
       </div>
     </div>
   );
