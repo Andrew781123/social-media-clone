@@ -16,15 +16,7 @@ const postReducer = (state = initialState, action) => {
         loading: false
       };
     }
-    // case "CREATE_POST": {
-    //   const pinnedPosts = state.posts.filter(post => post.priority > 0);
-    //   const notPinnedPosts = state.posts.filter(post => post.priority === 0);
-    //   return {
-    //     ...state,
-    //     posts: [...pinnedPosts, action.payload, ...notPinnedPosts],
-    //     loading: false
-    //   };
-    // }
+
     case "CREATE_POST": {
       return {
         ...state,
@@ -40,6 +32,15 @@ const postReducer = (state = initialState, action) => {
             return action.payload.newPost;
           } else return post;
         })
+      };
+    }
+
+    case "DELETE_POST": {
+      return {
+        ...state,
+        posts: state.posts.filter(
+          post => post._id.toString() !== action.payload
+        )
       };
     }
 

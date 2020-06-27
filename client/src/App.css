@@ -336,21 +336,26 @@ select {
 
 .post-item-top {
   display: flex;
+  align-items: center;
   margin-bottom: 0.5rem;
   border-bottom: var(--border);
 }
 
 .post-item-option-buttons {
   display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   margin-left: auto;
   margin-right: 2rem;
+  height: 3rem;
 }
 
 .post-item-option-buttons .post-item-edit-button {
   align-self: center;
 }
 
-.post-item-option-buttons .post-item-edit-button:hover {
+.post-item-option-buttons .post-item-edit-button:hover,
+.post-item-delete-button:hover {
   color: var(--hover-color);
 }
 

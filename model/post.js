@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const { userSchema } = require("./user");
 
 const { commentSchema } = require("./comment");
+const { Comment } = require("./comment");
 const moment = require("moment");
 
 const postSchema = new mongoose.Schema(
@@ -54,6 +55,20 @@ postSchema.virtual("formattedCreatedAt").get(function () {
 
 postSchema.virtual("likeCount").get(function () {
   return this.likes.length;
+});
+
+postSchema.pre("remove", async function (next) {
+  try {
+    const comments = await Comment.find({ post: this._id });
+    if (comments.length > 0) {
+      for (const comment of comments) {
+        await comment.remove();
+      }
+    }
+    next();
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 const Post = mongoose.model("post", postSchema);

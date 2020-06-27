@@ -10,7 +10,8 @@ const PostComments = ({
 
   getComments,
   commentCount,
-  comments
+  comments,
+  loadingComments
 }) => {
   const [commentShown, setcommentShown] = useState(commentNum);
   const [isMoreComments, setIsMoreComments] = useState(null);
@@ -42,6 +43,7 @@ const PostComments = ({
           View more {`(${commentCount - commentShown})`}
         </p>
       )}
+      {loadingComments && <h2 style={{ color: "white" }}>Loading...</h2>}
       {comments &&
         comments.map(comment => (
           <PostCommentItem key={comment._id} comment={comment} />
@@ -56,7 +58,8 @@ const mapStateToProps = (state, ownProps) => {
     comments: state.post.posts.find(post => post._id.toString() === postId)
       .comments,
     commentCount: state.post.posts.find(post => post._id.toString() === postId)
-      .commentCount
+      .commentCount,
+    loadingComments: state.post.loadingComments
   };
 };
 

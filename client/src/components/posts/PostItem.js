@@ -6,7 +6,14 @@ import PostComments from "./PostComments";
 import CreatedTime from "./CreatedTime";
 import axios from "axios";
 
-const PostItem = ({ post, currentUserId, incLike, decLike, editPost }) => {
+const PostItem = ({
+  post,
+  currentUserId,
+  incLike,
+  decLike,
+  editPost,
+  deletePost
+}) => {
   const [isLiked, setIsLiked] = useState(null);
   const [edit, setEdit] = useState({
     isEdit: false,
@@ -74,6 +81,10 @@ const PostItem = ({ post, currentUserId, incLike, decLike, editPost }) => {
     });
   };
 
+  const handleDelete = () => {
+    deletePost(post._id.toString());
+  };
+
   const handlePostContentChange = e => {
     const { value } = e.target;
 
@@ -117,9 +128,17 @@ const PostItem = ({ post, currentUserId, incLike, decLike, editPost }) => {
         </div>
         <div className='post-item-option-buttons'>
           {post.user._id.toString() === currentUserId && (
-            <button className='post-item-edit-button' onClick={handleEdit}>
-              Edit
-            </button>
+            <>
+              <button className='post-item-edit-button' onClick={handleEdit}>
+                Edit
+              </button>
+              <button
+                className='post-item-delete-button'
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+            </>
           )}
         </div>
       </div>

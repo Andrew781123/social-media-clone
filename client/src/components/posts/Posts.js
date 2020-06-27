@@ -6,7 +6,8 @@ import {
   incLike,
   decLike,
   addComment,
-  editPost
+  editPost,
+  deletePost
 } from "../../Redux/actions/postActions";
 
 const Posts = ({
@@ -16,7 +17,8 @@ const Posts = ({
   incLike,
   decLike,
   addComment,
-  editPost
+  editPost,
+  deletePost
 }) => {
   const { posts, loading, loadingNewPost } = post;
   const { user } = auth;
@@ -40,6 +42,7 @@ const Posts = ({
             decLike={decLike}
             user={user}
             editPost={editPost}
+            deletePost={deletePost}
           />
         ))
       ) : (
@@ -61,7 +64,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(decLike(currentUserId, postId, post)),
   addComment: (username, postId, comment) =>
     dispatch(addComment(username, postId, comment)),
-  editPost: (postId, newPost) => dispatch(editPost(postId, newPost))
+  editPost: (postId, newPost) => dispatch(editPost(postId, newPost)),
+  deletePost: postId => dispatch(deletePost(postId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

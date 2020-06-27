@@ -63,6 +63,19 @@ export const editPost = (postId, newPost) => async dispatch => {
   }
 };
 
+export const deletePost = postId => async dispatch => {
+  try {
+    await axios({
+      method: "DELETE",
+      url: `/api/posts/${postId}`
+    });
+
+    dispatch({ type: "DELETE_POST", payload: postId });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const incLike = (currentUserId, postId) => {
   return { type: "INC_LIKE", payload: { postId, userId: currentUserId } };
 };
