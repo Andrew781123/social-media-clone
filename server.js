@@ -38,7 +38,10 @@ app.use("/api/posts", postRouter);
 const authRouter = require("./routes/auth");
 app.use("/api/auth", authRouter);
 
-if (process.env.NODE_ENV === undefined) {
+if (
+  process.env.NODE_ENV === undefined ||
+  process.env.NODE_ENV === "production"
+) {
   app.use(express.static("client/build"));
 
   app.get("*", (req, res) => {

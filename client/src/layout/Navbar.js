@@ -6,7 +6,11 @@ import UserIconDropdown from "../components/user/UserIconDropdown";
 
 const handleLogout = () => {
   // window.open("http://localhost:5000/api/auth/logout", "_self");
-  window.open("https://fakes-book.herokuapp.com/api/auth/logout", "_self");
+  // window.open("https://fakes-book.herokuapp.com/api/auth/logout", "_self");
+  window.open(
+    "ec2-54-67-80-77.us-west-1.compute.amazonaws.com/api/auth/google",
+    "_self"
+  );
 };
 
 const handleUserIconClick = (showDropdown, setShowDropdown) => {

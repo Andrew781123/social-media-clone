@@ -16,7 +16,7 @@ router.get(
 
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   if (typeof req.user.username === "undefined") {
-    if (process.env.NODE_ENV !== "production")
+    if (process.env.NODE_ENV === "development")
       res.redirect(
         `http://localhost:3000/newUser?id=${req.user._id.toString()}`
       );
@@ -25,7 +25,7 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
         `${process.env.CLIENT_URL}/newUser?id=${req.user._id.toString()}`
       );
   } else {
-    if (process.env.NODE_ENV !== "production")
+    if (process.env.NODE_ENV === "development")
       res.redirect("http://localhost:3000/");
     else res.redirect(`${process.env.CLIENT_URL}`);
   }
@@ -37,7 +37,7 @@ router.get("/login/success", authroizeUser, (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.logout();
-  if (process.env.NODE_ENV !== "production")
+  if (process.env.NODE_ENV == "development")
     res.redirect("http://localhost:3000/auth/login");
   else res.redirect(res.redirect(`${process.env.CLIENT_URL}/auth/login`));
 });
