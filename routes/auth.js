@@ -22,12 +22,12 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
       );
     else
       res.redirect(
-        `https://fakes-book.herokuapp.com/newUser?id=${req.user._id.toString()}`
+        `${process.env.CLIENT_URL}/newUser?id=${req.user._id.toString()}`
       );
   } else {
     if (process.env.NODE_ENV !== "production")
       res.redirect("http://localhost:3000/");
-    else res.redirect("https://fakes-book.herokuapp.com");
+    else res.redirect(`${process.env.CLIENT_URL}`);
   }
 });
 
@@ -39,8 +39,7 @@ router.get("/logout", (req, res) => {
   req.logout();
   if (process.env.NODE_ENV !== "production")
     res.redirect("http://localhost:3000/auth/login");
-  else
-    res.redirect(res.redirect("https://fakes-book.herokuapp.com/auth/login"));
+  else res.redirect(res.redirect(`${process.env.CLIENT_URL}/auth/login`));
 });
 
 module.exports = router;
