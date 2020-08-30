@@ -13,6 +13,8 @@ import store from "./Redux/store";
 
 import { loadUser } from "./Redux/actions/authActions";
 
+require("dotenv").config();
+
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
