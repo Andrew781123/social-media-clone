@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import PostContentInput from "./PostContentInput";
+import { AiOutlinePicture } from "react-icons/ai";
+import { IconContext } from "react-icons";
 
 const PostForm = props => {
   const { handleSubmit, content, handleSelect, handleChange } = props;
 
   const [postContentInput, setPostContentInput] = useState("");
+
+  const imageUploadButton = useRef(null);
 
   return (
     <form onSubmit={e => handleSubmit(e)}>
@@ -13,12 +17,20 @@ const PostForm = props => {
         handleChange={handleChange}
         placeholder='Write somethings to share'
       />
-      <div>
+      <div className='form-options'>
         <select name='isPublic' onChange={() => handleSelect()}>
           <option value='meaningless'>為了看起來多一點功能而存在的選項</option>
           <option value='public'>Public</option>
           <option value='private'>Private</option>
         </select>
+        <input
+          type='file'
+          style={{ display: "none" }}
+          ref={imageUploadButton}
+        />
+        <IconContext.Provider value={{ className: "upload-picture-button" }}>
+          <AiOutlinePicture onClick={() => imageUploadButton.current.click()} />
+        </IconContext.Provider>
         <button className='post-submit' type='submit'>
           Post
         </button>

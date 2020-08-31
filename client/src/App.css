@@ -145,12 +145,25 @@ nav > ul > li {
   justify-content: center;
 }
 
+.form-options {
+  display: flex;
+  align-items: center;
+}
+
 select {
   background-color: var(--secondery-background-color);
   color: var(--primary-color);
   border: none;
-  width: 80%;
+  width: 70%;
   height: 30px;
+}
+
+.upload-picture-button {
+  color: white;
+  width: 10%;
+  padding: 0;
+  font-size: 2rem;
+  margin: 0;
 }
 
 .post-submit {

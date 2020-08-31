@@ -1,4 +1,4 @@
-import axios from "axios";
+import { default as axios } from "../../api/proxy";
 
 export const loadUser = () => async dispatch => {
   try {

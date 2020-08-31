@@ -15,6 +15,7 @@ router.get(
 );
 
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
+  console.log(req.user.username);
   if (typeof req.user.username === "undefined") {
     res.redirect(
       `${process.env.CLIENT_URL}/newUser?id=${req.user._id.toString()}`
