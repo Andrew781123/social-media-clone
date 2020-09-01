@@ -150,6 +150,18 @@ nav > ul > li {
   align-items: center;
 }
 
+.upload-image-preview {
+  height: 100%;
+}
+
+.image-uplaod-preview-cover {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  height: 250px;
+  object-fit: cover;
+}
+
 select {
   background-color: var(--secondery-background-color);
   color: var(--primary-color);

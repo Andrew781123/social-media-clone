@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import UserIcon from "../user/UserIcon";
-import PostContentInput from "./PostContentInput";
 import PostForm from "./PostForm";
 import { createPost } from "../../Redux/actions/postActions";
+
+const initialPostState = {
+  content: "",
+  imageURL: null,
+  type: "Public"
+};
 
 const WelcomeBlock = ({ auth, createPost }) => {
   const { user } = auth;
 
-  const [post, setPost] = useState({
-    content: "",
-    type: "Public"
-  });
+  const [post, setPost] = useState(initialPostState);
 
   const handleChange = e => {
     setPost({ ...post, [e.target.name]: e.target.value });
+  };
+
+  const handleImageSelect = imageURL => {
+    setPost(post => ({ ...post, imageURL }));
   };
 
   const handleSelect = e => {
@@ -23,10 +29,7 @@ const WelcomeBlock = ({ auth, createPost }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setPost({
-      content: "",
-      type: "Public"
-    });
+    setPost(initialPostState);
     createPost(post, user);
   };
 
@@ -45,6 +48,7 @@ const WelcomeBlock = ({ auth, createPost }) => {
         content={post.content}
         handleSelect={handleSelect}
         handleChange={handleChange}
+        handleImageSelect={handleImageSelect}
       />
     </div>
   );

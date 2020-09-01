@@ -1,4 +1,4 @@
-import axios from "axios";
+import { default as axios } from "../../api/proxy";
 
 export const getPost = () => async dispatch => {
   dispatch({ type: "SET_POST_LOADING" });

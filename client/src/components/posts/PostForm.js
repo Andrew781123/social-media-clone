@@ -4,11 +4,22 @@ import { AiOutlinePicture } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
 const PostForm = props => {
-  const { handleSubmit, content, handleSelect, handleChange } = props;
+  const {
+    handleSubmit,
+    content,
+    handleSelect,
+    handleChange,
+    handleImageSelect
+  } = props;
 
-  const [postContentInput, setPostContentInput] = useState("");
-
+  const [imagePreviewURL, setImagePreviewURL] = useState(null);
   const imageUploadButton = useRef(null);
+
+  const imageSelect = e => {
+    const objectURL = URL.createObjectURL(e.target.files[0]);
+    setImagePreviewURL(objectURL);
+    handleImageSelect(objectURL);
+  };
 
   return (
     <form onSubmit={e => handleSubmit(e)}>
@@ -17,6 +28,15 @@ const PostForm = props => {
         handleChange={handleChange}
         placeholder='Write somethings to share'
       />
+      {imagePreviewURL && (
+        <div className='image-uplaod-preview-cover'>
+          <img
+            className='upload-image-preview'
+            src={imagePreviewURL}
+            alt='preview'
+          />
+        </div>
+      )}
       <div className='form-options'>
         <select name='isPublic' onChange={() => handleSelect()}>
           <option value='meaningless'>為了看起來多一點功能而存在的選項</option>
@@ -27,6 +47,7 @@ const PostForm = props => {
           type='file'
           style={{ display: "none" }}
           ref={imageUploadButton}
+          onChange={imageSelect}
         />
         <IconContext.Provider value={{ className: "upload-picture-button" }}>
           <AiOutlinePicture onClick={() => imageUploadButton.current.click()} />
