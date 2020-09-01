@@ -37,6 +37,7 @@ export const createPost = (post, user) => async dispatch => {
   const formData = new FormData();
 
   for (const field in newPost) {
+    console.log(field, newPost[field]);
     //If the value of the field is object or boolean
     if (checkIsObject(newPost[field]) || typeof newPost[field] === "boolean") {
       newPost[field] = JSON.stringify(newPost[field]);

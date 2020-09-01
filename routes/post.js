@@ -7,6 +7,7 @@ const { Comment } = require("../model/comment");
 const multer = require("multer");
 const path = require("path");
 const getRelativePath = require("../utils/getRelativePath");
+const fs = require("fs");
 
 router.get("/", async (req, res) => {
   try {
@@ -37,22 +38,27 @@ router.post("/", async (req, res) => {
   }).single("image");
 
   upload(req, res, async err => {
-    if (err) {
-      console.log("cannot save image");
-      return;
-    }
-
     const { user, content, isPublic } = req.body;
 
-    const imagePath = req.file.path;
-    const relativePath = getRelativePath(imagePath);
+    if (content === "")
+      return res.status.json({ message: "Description cannot be empty" });
+
+    if (err) {
+      return res.status(500).json({ message: "Cannot save Image" });
+    }
+
+    let relativePath;
+    if (req.file) {
+      const imagePath = req.file.path;
+      relativePath = getRelativePath(imagePath);
+    }
 
     try {
       //create new post
       const newPost = new Post({
         user: JSON.parse(user),
         content,
-        imageURL: relativePath,
+        imageURL: relativePath || null,
         isPublic: JSON.parse(isPublic)
       });
       //shift and push to user
@@ -92,6 +98,12 @@ router.delete("/:id", async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
+    }
+
+    //remove image
+    const imageURL = post.imageURL;
+    if (imageURL) {
+      fs.unlinkSync(path.resolve(__dirname, `../${imageURL}`));
     }
 
     await post.remove();

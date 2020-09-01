@@ -10,6 +10,7 @@ const PostContentInput = props => {
       value={content}
       onChange={e => handleChange(e)}
       placeholder={placeholder}
+      required
     ></textarea>
   );
 };
