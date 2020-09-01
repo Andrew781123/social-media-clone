@@ -153,13 +153,15 @@ const PostItem = ({
         ) : (
           <p className='post-description'>{post.content}</p>
         )}
-        <div className='post-image-container'>
-          <img
-            src={`http://localhost:5000/${post.imageURL}`}
-            alt='post'
-            className='post-image'
-          />
-        </div>
+        {post.imageURL && (
+          <div className='post-image-container'>
+            <img
+              src={`${process.env.REACT_APP_SERVER_URL}/${post.imageURL}`}
+              alt='post'
+              className='post-image'
+            />
+          </div>
+        )}
       </div>
 
       <div className='like-button-and-count'>
