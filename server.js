@@ -11,6 +11,11 @@ const passport = require("passport");
 // database
 require("./database")();
 
+app.use(
+  "/public/posts/images",
+  express.static(__dirname + "/public/posts/images")
+);
+
 app.use(express.json());
 app.use(
   cors({
@@ -39,9 +44,10 @@ const authRouter = require("./routes/auth");
 app.use("/api/auth", authRouter);
 
 if (
-  process.env.NODE_ENV === undefined ||
+  // process.env.NODE_ENV === undefined ||
   process.env.NODE_ENV === "production"
 ) {
+  console.log(process.env.NODE_ENV);
   app.use(express.static("client/build"));
 
   app.get("*", (req, res) => {

@@ -15,6 +15,10 @@ const postSchema = new mongoose.Schema(
       required: true
     },
 
+    imageURL: {
+      type: String
+    },
+
     isPublic: {
       type: Boolean,
       required: true

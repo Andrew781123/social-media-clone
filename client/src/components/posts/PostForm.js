@@ -9,17 +9,11 @@ const PostForm = props => {
     content,
     handleSelect,
     handleChange,
-    handleImageSelect
+    handleImageSelect,
+    imagePreviewURL
   } = props;
 
-  const [imagePreviewURL, setImagePreviewURL] = useState(null);
   const imageUploadButton = useRef(null);
-
-  const imageSelect = e => {
-    const objectURL = URL.createObjectURL(e.target.files[0]);
-    setImagePreviewURL(objectURL);
-    handleImageSelect(objectURL);
-  };
 
   return (
     <form onSubmit={e => handleSubmit(e)}>
@@ -47,7 +41,7 @@ const PostForm = props => {
           type='file'
           style={{ display: "none" }}
           ref={imageUploadButton}
-          onChange={imageSelect}
+          onChange={handleImageSelect}
         />
         <IconContext.Provider value={{ className: "upload-picture-button" }}>
           <AiOutlinePicture onClick={() => imageUploadButton.current.click()} />

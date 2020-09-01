@@ -6,7 +6,7 @@ import { createPost } from "../../Redux/actions/postActions";
 
 const initialPostState = {
   content: "",
-  imageURL: null,
+  image: null,
   type: "Public"
 };
 
@@ -14,13 +14,17 @@ const WelcomeBlock = ({ auth, createPost }) => {
   const { user } = auth;
 
   const [post, setPost] = useState(initialPostState);
+  const [imagePreviewURL, setImagePreviewURL] = useState(null);
 
   const handleChange = e => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
 
-  const handleImageSelect = imageURL => {
-    setPost(post => ({ ...post, imageURL }));
+  const handleImageSelect = e => {
+    const selectedFile = e.target.files[0];
+    const objectURL = URL.createObjectURL(selectedFile);
+    setImagePreviewURL(objectURL);
+    setPost(post => ({ ...post, image: selectedFile }));
   };
 
   const handleSelect = e => {
@@ -29,6 +33,7 @@ const WelcomeBlock = ({ auth, createPost }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setImagePreviewURL(null);
     setPost(initialPostState);
     createPost(post, user);
   };
@@ -49,6 +54,7 @@ const WelcomeBlock = ({ auth, createPost }) => {
         handleSelect={handleSelect}
         handleChange={handleChange}
         handleImageSelect={handleImageSelect}
+        imagePreviewURL={imagePreviewURL}
       />
     </div>
   );

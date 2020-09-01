@@ -1,4 +1,5 @@
 import { default as axios } from "../../api/proxy";
+import checkIsObject from "../../utils/checkIsObject";
 
 export const getPost = () => async dispatch => {
   dispatch({ type: "SET_POST_LOADING" });
@@ -21,23 +22,34 @@ export const removePreviousNewPosts = () => {
 
 export const createPost = (post, user) => async dispatch => {
   dispatch({ type: "SET_NEWPOST_LOADING" });
-  const { content, type } = post;
+  const { type } = post;
   let isPublic;
   if (type === "public") isPublic = true;
   else isPublic = false;
 
+  const newPost = {
+    user,
+    isPublic,
+    image: post.image,
+    content: post.content
+  };
+
+  const formData = new FormData();
+
+  for (const field in newPost) {
+    //If the value of the field is object or boolean
+    if (checkIsObject(newPost[field]) || typeof newPost[field] === "boolean") {
+      newPost[field] = JSON.stringify(newPost[field]);
+    }
+    formData.set(field, newPost[field]);
+  }
+
   try {
     const res = await axios({
       method: "POST",
+      headers: { "content-type": "multipart/form-data" },
       url: "/api/posts",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: {
-        user,
-        content,
-        isPublic
-      }
+      data: formData
     });
 
     dispatch({ type: "CREATE_POST", payload: res.data });

@@ -2,9 +2,11 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const { Post } = require("../model/post");
-const { User } = require("../model/user");
 
 const { Comment } = require("../model/comment");
+const multer = require("multer");
+const path = require("path");
+const getRelativePath = require("../utils/getRelativePath");
 
 router.get("/", async (req, res) => {
   try {
@@ -30,25 +32,40 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { user, content, isPublic } = req.body;
+  const upload = multer({
+    dest: path.resolve(__dirname, "../public/posts/images")
+  }).single("image");
 
-  try {
-    //create new post
-    const newPost = new Post({
-      user,
-      content,
-      isPublic
-    });
-    //shift and push to user
+  upload(req, res, async err => {
+    if (err) {
+      console.log("cannot save image");
+      return;
+    }
 
-    //save
-    const savedPost = await newPost.save();
-    const postObject = savedPost.toObject();
-    res.status(201).json({ ...postObject, commentCount: 0 });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server Error" });
-  }
+    const { user, content, isPublic } = req.body;
+
+    const imagePath = req.file.path;
+    const relativePath = getRelativePath(imagePath);
+
+    try {
+      //create new post
+      const newPost = new Post({
+        user: JSON.parse(user),
+        content,
+        imageURL: relativePath,
+        isPublic: JSON.parse(isPublic)
+      });
+      //shift and push to user
+
+      //save
+      const savedPost = await newPost.save();
+      const postObject = savedPost.toObject();
+      res.status(201).json({ ...postObject, commentCount: 0 });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server Error" });
+    }
+  });
 });
 
 router.patch("/:id", async (req, res) => {

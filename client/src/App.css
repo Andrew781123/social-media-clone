@@ -400,8 +400,8 @@ select {
   color: var(--primary-color);
 }
 
-.post-item-container > p {
-  min-height: 5em;
+.post-description {
+  min-height: 3em;
   margin-top: 0.5em;
   color: var(--primary-color);
   white-space: pre-wrap;
@@ -409,6 +409,22 @@ select {
 
 .post-item-data {
   color: var(--secondary-color);
+}
+
+.post-main-content {
+  width: 100%;
+}
+
+.post-image-container {
+  width: 100%;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(39, 39, 39);
+}
+
+.post-image {
+  height: 20rem;
 }
 
 .like-button-and-count {

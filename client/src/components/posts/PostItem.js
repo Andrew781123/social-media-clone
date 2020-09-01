@@ -23,7 +23,7 @@ const PostItem = ({
   });
 
   useEffect(() => {
-    console.log("postItem rendered");
+    console.log(`imageURL: ${post.imageURL}`);
     let liked = false;
     for (let _id of post.likes) {
       if (_id.toString() === currentUserId) {
@@ -142,16 +142,25 @@ const PostItem = ({
           )}
         </div>
       </div>
-      {edit.isEdit ? (
-        <PostForm
-          content={edit.newPost.content}
-          handleChange={handlePostContentChange}
-          handleSubmit={handleSubmit}
-          placeholder='Write somethings to share'
-        />
-      ) : (
-        <p>{post.content}</p>
-      )}
+      <div className='post-main-content'>
+        {edit.isEdit ? (
+          <PostForm
+            content={edit.newPost.content}
+            handleChange={handlePostContentChange}
+            handleSubmit={handleSubmit}
+            placeholder='Write somethings to share'
+          />
+        ) : (
+          <p className='post-description'>{post.content}</p>
+        )}
+        <div className='post-image-container'>
+          <img
+            src={`http://localhost:5000/${post.imageURL}`}
+            alt='post'
+            className='post-image'
+          />
+        </div>
+      </div>
 
       <div className='like-button-and-count'>
         <button
