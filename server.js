@@ -44,7 +44,7 @@ const authRouter = require("./routes/auth");
 app.use("/api/auth", authRouter);
 
 if (
-  // process.env.NODE_ENV === undefined ||
+  process.env.NODE_ENV === undefined ||
   process.env.NODE_ENV === "production"
 ) {
   console.log(process.env.NODE_ENV);
