@@ -24,14 +24,14 @@ const WelcomeBlock = ({ auth, createPost }) => {
 
   const handleImageSelect = e => {
     const selectedFile = e.target.files[0];
-    console.log(selectedFile.size);
+
     if (
       selectedFile.type !== "image/jpeg" &&
       selectedFile.type !== "image/png" &&
       selectedFile.type !== "image/svg+xml"
     ) {
       return setImageUploadError("Only jpeg, png and svg are accepted");
-    }
+    } else if (imageUploadError) setImageUploadError(null);
 
     const objectURL = URL.createObjectURL(selectedFile);
     setImagePreviewURL(objectURL);
@@ -44,6 +44,7 @@ const WelcomeBlock = ({ auth, createPost }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (imageUploadError) setImageUploadError(null);
     setImagePreviewURL(null);
     setPost(initialPostState);
     createPost(post, user);

@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const upload = multer({
-    dest: path.resolve(__dirname, "../public/posts/images"),
+    dest: "public/posts/images",
     fileFilter
   }).single("image");
 
@@ -50,18 +50,12 @@ router.post("/", async (req, res) => {
       return res.status(500).json({ message: "Cannot save Image" });
     }
 
-    let relativePath;
-    if (req.file) {
-      const imagePath = req.file.path;
-      relativePath = getRelativePath(imagePath);
-    }
-
     try {
       //create new post
       const newPost = new Post({
         user: JSON.parse(user),
         content,
-        imageURL: relativePath || null,
+        imageURL: req.file.path || null,
         isPublic: JSON.parse(isPublic)
       });
       //shift and push to user
