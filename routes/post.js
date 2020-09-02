@@ -5,7 +5,6 @@ const { Post } = require("../model/post");
 const { Comment } = require("../model/comment");
 const multer = require("multer");
 const path = require("path");
-const getRelativePath = require("../utils/getRelativePath");
 const fs = require("fs");
 const fileFilter = require("../utils/image-file-filter");
 const storage = require("../utils/image-upload-disk-storage");

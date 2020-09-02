@@ -28,9 +28,10 @@ const WelcomeBlock = ({ auth, createPost }) => {
     if (
       selectedFile.type !== "image/jpeg" &&
       selectedFile.type !== "image/png" &&
-      selectedFile.type !== "image/svg+xml"
+      selectedFile.type !== "image/svg+xml" &&
+      selectedFile.type !== "image/gif"
     ) {
-      return setImageUploadError("Only jpeg, png and svg are accepted");
+      return setImageUploadError("Only jpeg, png, svg and gif are accepted");
     } else if (imageUploadError) setImageUploadError(null);
 
     const objectURL = URL.createObjectURL(selectedFile);
