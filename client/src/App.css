@@ -417,14 +417,14 @@ select {
 
 .post-image-container {
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: flex;
   justify-content: center;
   background-color: rgb(39, 39, 39);
 }
 
 .post-image {
-  height: 20rem;
+  max-height: 20rem;
 }
 
 .like-button-and-count {
