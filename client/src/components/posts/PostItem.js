@@ -5,6 +5,9 @@ import PostCommentForm from "./PostCommentForm";
 import PostComments from "./PostComments";
 import CreatedTime from "./CreatedTime";
 import axios from "axios";
+import { IconContext } from "react-icons/lib";
+import { AiOutlineEdit } from "react-icons/ai";
+import { HiOutlineTrash } from "react-icons/hi";
 
 const PostItem = ({
   post,
@@ -129,15 +132,16 @@ const PostItem = ({
         <div className='post-item-option-buttons'>
           {post.user._id.toString() === currentUserId && (
             <>
-              <button className='post-item-edit-button' onClick={handleEdit}>
-                Edit
-              </button>
-              <button
-                className='post-item-delete-button'
-                onClick={handleDelete}
+              <IconContext.Provider
+                value={{ className: "post-item-edit-button" }}
               >
-                Delete
-              </button>
+                <AiOutlineEdit onClick={handleEdit} />
+              </IconContext.Provider>
+              <IconContext.Provider
+                value={{ className: "post-item-delete-button" }}
+              >
+                <HiOutlineTrash onClick={handleDelete} />
+              </IconContext.Provider>
             </>
           )}
         </div>

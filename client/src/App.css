@@ -368,20 +368,36 @@ select {
 
 .post-item-option-buttons {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-left: auto;
-  margin-right: 2rem;
+  align-items: flex-start;
   height: 3rem;
+  margin-left: auto;
 }
 
-.post-item-option-buttons .post-item-edit-button {
-  align-self: center;
+.post-item-option-buttons .post-item-edit-button,
+.post-item-delete-button {
+  font-size: 1.7rem;
+}
+
+.post-item-edit-button {
+  color: rgb(0, 153, 224);
+  margin-right: 0.4rem;
+}
+
+.post-item-edit-button:hover {
+  color: rgb(59, 193, 255);
+}
+
+.post-item-delete-button {
+  color: rgb(209, 0, 0);
+}
+
+.post-item-delete-button:hover {
+  color: rgb(255, 47, 47);
 }
 
 .post-item-option-buttons .post-item-edit-button:hover,
 .post-item-delete-button:hover {
-  color: var(--hover-color);
+  cursor: pointer;
 }
 
 .user-info {
@@ -421,6 +437,8 @@ select {
   display: flex;
   justify-content: center;
   background-color: rgb(39, 39, 39);
+  /* quick fix for browsers not supporting object-fit */
+  overflow: hidden;
 }
 
 .post-image {
