@@ -24,10 +24,10 @@ const WelcomeBlock = ({ auth, createPost }) => {
 
   const handleImageSelect = e => {
     const selectedFile = e.target.files[0];
-
+    console.log(selectedFile.size);
     if (
-      selectedFile.type !== "image/jpeg" ||
-      selectedFile.type !== "image/png" ||
+      selectedFile.type !== "image/jpeg" &&
+      selectedFile.type !== "image/png" &&
       selectedFile.type !== "image/svg+xml"
     ) {
       return setImageUploadError("Only jpeg, png and svg are accepted");

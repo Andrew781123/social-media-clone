@@ -3,7 +3,6 @@ import "./error-message.css";
 import { BiErrorCircle } from "react-icons/bi";
 import { IconContext } from "react-icons/lib";
 import { AiOutlineClose } from "react-icons/ai";
-import { useState } from "react";
 
 const ErrorMessage = props => {
   const { errorMessage, setErrorMessage } = props;

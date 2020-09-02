@@ -1,6 +1,6 @@
 .error-message-container {
   width: 100%;
-  background-color: orange;
+  background-color: rgb(255, 199, 94);
   display: flex;
   align-items: center;
   padding: 0.8rem 0.3rem;
@@ -9,16 +9,18 @@
 }
 
 .error-message-icon {
-  color: rgb(255, 0, 0);
+  color: rgb(255, 34, 34);
+  font-size: 1.2rem;
   margin-right: 0.7rem;
 }
 
 .error-message-cancel-button {
-  color: red;
+  color: rgb(255, 34, 34);
+  font-size: 1.1rem;
   margin-left: auto;
   cursor: pointer;
 }
 
 .error-message {
-  color: red;
+  color: rgb(255, 34, 34);
 }

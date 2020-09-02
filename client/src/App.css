@@ -180,7 +180,7 @@ select {
 
 .post-submit {
   width: 20%;
-  background-color: rgb(175, 21, 21);
+  background-color: rgb(218, 54, 54);
   color: white;
   border: none;
   height: 30px;
@@ -190,13 +190,13 @@ select {
 
 .post-form-container button:hover {
   cursor: pointer;
-  background-color: rgb(129, 15, 15);
+  background-color: rgb(187, 34, 34);
 }
 
 .welcome-container {
   display: flex;
   align-items: center;
-  background-color: rgba(9, 78, 9, 0.685);
+  background-color: #48aaad;
   padding: 0.5em;
   border-top-left-radius: 1em;
   border-top-right-radius: 1em;
