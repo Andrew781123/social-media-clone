@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import PostContentInput from "./PostContentInput";
 import { AiOutlinePicture } from "react-icons/ai";
 import { IconContext } from "react-icons";
