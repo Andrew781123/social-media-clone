@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import UserIcon from "../user/UserIcon";
 import PostForm from "./PostForm";
 import { createPost } from "../../Redux/actions/postActions";
+import ErrorMessage from "../shared/ErrorMessage";
 
 const initialPostState = {
   content: "",
@@ -15,6 +16,7 @@ const WelcomeBlock = ({ auth, createPost }) => {
 
   const [post, setPost] = useState(initialPostState);
   const [imagePreviewURL, setImagePreviewURL] = useState(null);
+  const [imageUploadError, setImageUploadError] = useState(null);
 
   const handleChange = e => {
     setPost({ ...post, [e.target.name]: e.target.value });
@@ -22,6 +24,15 @@ const WelcomeBlock = ({ auth, createPost }) => {
 
   const handleImageSelect = e => {
     const selectedFile = e.target.files[0];
+
+    if (
+      selectedFile.type !== "image/jpeg" ||
+      selectedFile.type !== "image/png" ||
+      selectedFile.type !== "image/svg+xml"
+    ) {
+      return setImageUploadError("Only jpeg, png and svg are accepted");
+    }
+
     const objectURL = URL.createObjectURL(selectedFile);
     setImagePreviewURL(objectURL);
     setPost(post => ({ ...post, image: selectedFile }));
@@ -40,6 +51,10 @@ const WelcomeBlock = ({ auth, createPost }) => {
 
   return (
     <div className='post-form-container'>
+      <ErrorMessage
+        errorMessage={imageUploadError}
+        setErrorMessage={setImageUploadError}
+      />
       <div className='welcome-container'>
         <UserIcon />
         <div className='welcome-message'>

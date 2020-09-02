@@ -1,0 +1,24 @@
+.error-message-container {
+  width: 100%;
+  background-color: orange;
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 0.3rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+.error-message-icon {
+  color: rgb(255, 0, 0);
+  margin-right: 0.7rem;
+}
+
+.error-message-cancel-button {
+  color: red;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+}

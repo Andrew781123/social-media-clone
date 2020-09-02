@@ -8,6 +8,7 @@ const multer = require("multer");
 const path = require("path");
 const getRelativePath = require("../utils/getRelativePath");
 const fs = require("fs");
+const fileFilter = require("../utils/image-file-filter");
 
 router.get("/", async (req, res) => {
   try {
@@ -34,7 +35,8 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const upload = multer({
-    dest: path.resolve(__dirname, "../public/posts/images")
+    dest: path.resolve(__dirname, "../public/posts/images"),
+    fileFilter
   }).single("image");
 
   upload(req, res, async err => {
@@ -44,6 +46,7 @@ router.post("/", async (req, res) => {
       return res.status.json({ message: "Description cannot be empty" });
 
     if (err) {
+      console.log(err);
       return res.status(500).json({ message: "Cannot save Image" });
     }
 
