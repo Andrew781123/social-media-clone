@@ -49,12 +49,17 @@ router.post("/", async (req, res) => {
       return res.status(500).json({ message: "Cannot save Image" });
     }
 
+    let imageURL;
+    if (req.file) {
+      imageURL = req.file.path;
+    }
+
     try {
       //create new post
       const newPost = new Post({
         user: JSON.parse(user),
         content,
-        imageURL: req.file.path || null,
+        imageURL,
         isPublic: JSON.parse(isPublic)
       });
       //shift and push to user
