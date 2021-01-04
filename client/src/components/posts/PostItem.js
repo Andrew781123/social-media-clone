@@ -8,6 +8,7 @@ import axios from "axios";
 import { IconContext } from "react-icons/lib";
 import { AiOutlineEdit } from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
+import ProgressiveImage from "react-progressive-image";
 
 const PostItem = ({
   post,
@@ -26,7 +27,6 @@ const PostItem = ({
   });
 
   useEffect(() => {
-    console.log(`imageURL: ${post.imageURL}`);
     let liked = false;
     for (let _id of post.likes) {
       if (_id.toString() === currentUserId) {
@@ -159,12 +159,18 @@ const PostItem = ({
         )}
         {post.imageURL && (
           <div className='post-image-container'>
-            <img
+            <ProgressiveImage
               src={`${process.env.REACT_APP_SERVER_URL}/${post.imageURL}`}
-              alt='post'
-              className='post-image'
-            />
+              placeholder='tiny-image.jpg'
+            >
+              {src => <img src={src} alt='an image' className='post-image' />}
+            </ProgressiveImage>
           </div>
+          //   <img
+          //     src={`${process.env.REACT_APP_SERVER_URL}/${post.imageURL}`}
+          //     alt='post'
+          //     className='post-image'
+          //   />
         )}
       </div>
 

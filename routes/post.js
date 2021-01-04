@@ -69,8 +69,8 @@ router.post("/", async (req, res) => {
       const postObject = savedPost.toObject();
       res.status(201).json({ ...postObject, commentCount: 0 });
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Server Error" });
+      console.log(err.message);
+      res.status(500).json({ message: err.message });
     }
   });
 });

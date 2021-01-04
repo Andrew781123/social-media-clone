@@ -9,7 +9,6 @@ const initialState = {
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_POST": {
-      console.log("getting posts");
       return {
         ...state,
         posts: action.payload,

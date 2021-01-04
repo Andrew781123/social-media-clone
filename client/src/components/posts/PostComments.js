@@ -17,7 +17,6 @@ const PostComments = ({
   const [isMoreComments, setIsMoreComments] = useState(null);
 
   useEffect(() => {
-    // console.log(moreComments);
     if (commentCount <= commentShown) setIsMoreComments(false);
     else setIsMoreComments(true);
     // eslint-disable-next-line
