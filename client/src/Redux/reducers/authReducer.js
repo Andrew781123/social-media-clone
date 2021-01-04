@@ -1,8 +1,16 @@
+import uuid from 'react-uuid';
+
 const initialState = {
   isAuth: null,
   loading: null,
   user: { username: null, icon: { headColor: "white", bodyColor: "blue" } }
 };
+
+const guestUser = {
+  _id: uuid(),
+  username: 'guest',
+  icon: { headColor: "white", bodyColor: "blue" }
+}
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -13,6 +21,14 @@ const authReducer = (state = initialState, action) => {
         user: { ...state.user, ...action.payload },
         loading: false
       };
+    }
+    case 'GUEST_LOGIN': {
+      return {
+        ...state,
+        isAuth: true,
+        user: guestUser,
+        loading: false
+      }
     }
     case "LOAD_USER_FAIL": {
       return {

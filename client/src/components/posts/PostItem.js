@@ -16,7 +16,8 @@ const PostItem = ({
   incLike,
   decLike,
   editPost,
-  deletePost
+  deletePost,
+  user: {username}
 }) => {
   const [isLiked, setIsLiked] = useState(null);
   const [edit, setEdit] = useState({
@@ -39,6 +40,10 @@ const PostItem = ({
   }, [post, currentUserId]);
 
   const handleLike = async () => {
+    if(username.slice(0, 5) === 'guest') {
+      //set errorMessage
+    }
+
     if (isLiked === true) {
       decLike(currentUserId, post._id.toString(), post);
       try {
@@ -163,14 +168,9 @@ const PostItem = ({
               src={`${process.env.REACT_APP_SERVER_URL}/${post.imageURL}`}
               placeholder='tiny-image.jpg'
             >
-              {src => <img src={src} alt='an image' className='post-image' />}
+              {src => <img src={src} alt='post' className='post-image' />}
             </ProgressiveImage>
           </div>
-          //   <img
-          //     src={`${process.env.REACT_APP_SERVER_URL}/${post.imageURL}`}
-          //     alt='post'
-          //     className='post-image'
-          //   />
         )}
       </div>
 
@@ -182,16 +182,7 @@ const PostItem = ({
           Like
         </button>
         <small className='like-count'>
-          {post.likeCount === 0
-            ? "陰公冇人like :("
-            : post.likeCount === 1 && isLiked === true
-            ? "得自己like"
-            : post.likeCount === 1 &&
-              post.likes[0].toString() === post.user._id.toString()
-            ? "得佢自己like"
-            : post.likeCount === 1 && isLiked === false
-            ? `${post.likeCount} person liked`
-            : post.likeCount > 1 && `${post.likeCount} people liked`}
+          {`${post.likeCount} likes`}
         </small>
       </div>
       <div className='post-comment'>

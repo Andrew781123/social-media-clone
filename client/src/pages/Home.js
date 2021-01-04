@@ -4,7 +4,7 @@ import { loadUser } from "../Redux/actions/authActions";
 import WelcomeBlock from "../components/posts/WelcomeBlock";
 import Posts from "../components/posts/Posts";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div className='container'>
       <WelcomeBlock />
@@ -12,6 +12,7 @@ const Home = () => {
     </div>
   );
 };
+
 
 const mapStateToProps = state => ({
   auth: state.auth

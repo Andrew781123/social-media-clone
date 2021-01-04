@@ -11,6 +11,16 @@ export const loadUser = () => async dispatch => {
   }
 };
 
+export const guestLogin = () => async dispatch => {
+  try {
+    dispatch({ type: "SET_LOADING" });
+    dispatch({ type: "GUEST_LOGIN" });
+  } catch(err) {
+    dispatch({ type: "LOAD_USER_FAIL" });
+    console.error(err);
+  }
+}
+
 export const updateHeadColor = headColor => {
   return {
     type: "UPDATE_HEAD_COLOR",

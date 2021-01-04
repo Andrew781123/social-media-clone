@@ -34,4 +34,6 @@ router.get("/logout", (req, res) => {
   res.redirect(res.redirect(`${process.env.CLIENT_URL}/auth/login`));
 });
 
+
+
 module.exports = router;

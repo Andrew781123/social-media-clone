@@ -58,5 +58,5 @@ if (
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () =>
-  console.log(`server running on port ${PORT}, env: ${process.env.NODE_ENV}`)
+  console.log(`server running on port ${PORT}`)
 );

@@ -599,3 +599,13 @@ select {
   margin-left: 0.6rem;
   cursor: default;
 }
+
+#guest-log-in-button {
+  background-color: rgb(255, 205, 139);
+  color: rgb(0, 0, 0);
+  width: 40%;
+  margin-top: 0.5rem;
+  border-radius: 0.2rem;
+  padding: 0.8rem;
+  font-weight: bold;
+}
