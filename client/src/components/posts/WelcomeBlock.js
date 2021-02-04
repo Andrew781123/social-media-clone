@@ -52,28 +52,38 @@ const WelcomeBlock = ({ auth, createPost }) => {
   };
 
   return (
-    <div className='post-form-container'>
-      <ErrorMessage
-        errorMessage={imageUploadError}
-        setErrorMessage={setImageUploadError}
-      />
-      <div className='welcome-container'>
-        <UserIcon />
-        <div className='welcome-message'>
-          <span className='welcome'>
-            Welcome Back <span className='username'>{user.username}</span>
-          </span>
+    <>
+      {user.username === "guest" && (
+        <ErrorMessage
+          errorMessage={"Note: You must log in to add post and comment"}
+          setErrorMessage={setImageUploadError}
+        />
+      )}
+
+      <div className='post-form-container'>
+        <ErrorMessage
+          errorMessage={imageUploadError}
+          setErrorMessage={setImageUploadError}
+        />
+        <div className='welcome-container'>
+          <UserIcon />
+          <div className='welcome-message'>
+            <span className='welcome'>
+              Welcome Back <span className='username'>{user.username}</span>
+            </span>
+          </div>
         </div>
+        <PostForm
+          handleSubmit={handleSubmit}
+          content={post.content}
+          handleSelect={handleSelect}
+          handleChange={handleChange}
+          handleImageSelect={handleImageSelect}
+          imagePreviewURL={imagePreviewURL}
+          isGuess={!!user}
+        />
       </div>
-      <PostForm
-        handleSubmit={handleSubmit}
-        content={post.content}
-        handleSelect={handleSelect}
-        handleChange={handleChange}
-        handleImageSelect={handleImageSelect}
-        imagePreviewURL={imagePreviewURL}
-      />
-    </div>
+    </>
   );
 };
 

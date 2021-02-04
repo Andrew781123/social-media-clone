@@ -13,6 +13,7 @@ const handleUserIconClick = (showDropdown, setShowDropdown) => {
 };
 
 const Navbar = ({ auth }) => {
+  
   const { loading, isAuth, user } = auth;
 
   const [showDropdown, setShowDropdown] = useState(false);
@@ -29,7 +30,7 @@ const Navbar = ({ auth }) => {
             </Link>
           </li>
 
-          {!loading && isAuth ? (
+          {!loading && isAuth && user.username !== 'guest' ? (
             <Fragment>
               <li className='login-out'>
                 <UserIcon

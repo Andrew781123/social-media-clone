@@ -188,9 +188,18 @@ select {
   font-size: 1em;
 }
 
+.post-submit.disabled {
+  background-color: rgb(77, 77, 77);
+}
+
 .post-form-container button:hover {
   cursor: pointer;
   background-color: rgb(187, 34, 34);
+}
+
+.post-submit.disabled:hover {
+  cursor: auto;
+  background-color: rgb(77, 77, 77);
 }
 
 .welcome-container {

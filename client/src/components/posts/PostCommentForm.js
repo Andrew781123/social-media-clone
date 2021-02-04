@@ -95,7 +95,7 @@ const PostCommentForm = ({ addComment, postId, user, loadingNewComment }) => {
     e.preventDefault();
     setInput("");
 
-    addComment(user, postId, input);
+    if(user.username !== 'guest') addComment(user, postId, input);
   };
 
   return (

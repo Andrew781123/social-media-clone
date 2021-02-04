@@ -8,7 +8,7 @@ const ErrorMessage = props => {
   const { errorMessage, setErrorMessage } = props;
 
   const handleErrorClose = () => {
-    setErrorMessage(null);
+    if (setErrorMessage) setErrorMessage(null);
   };
 
   if (errorMessage) {

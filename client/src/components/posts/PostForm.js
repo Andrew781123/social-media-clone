@@ -10,7 +10,8 @@ const PostForm = props => {
     handleSelect,
     handleChange,
     handleImageSelect,
-    imagePreviewURL
+    imagePreviewURL,
+    isGuess
   } = props;
 
   const imageUploadButton = useRef(null);
@@ -33,7 +34,6 @@ const PostForm = props => {
       )}
       <div className='form-options'>
         <select name='isPublic' onChange={() => handleSelect()}>
-          <option value='meaningless'>為了看起來多一點功能而存在的選項</option>
           <option value='public'>Public</option>
           <option value='private'>Private</option>
         </select>
@@ -46,7 +46,11 @@ const PostForm = props => {
         <IconContext.Provider value={{ className: "upload-picture-button" }}>
           <AiOutlinePicture onClick={() => imageUploadButton.current.click()} />
         </IconContext.Provider>
-        <button className='post-submit' type='submit'>
+        <button
+          className={`post-submit ${isGuess && "disabled"}`}
+          type='submit'
+          disabled={"disabled"}
+        >
           Post
         </button>
       </div>
