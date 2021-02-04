@@ -80,7 +80,7 @@ const WelcomeBlock = ({ auth, createPost }) => {
           handleChange={handleChange}
           handleImageSelect={handleImageSelect}
           imagePreviewURL={imagePreviewURL}
-          isGuess={!!user}
+          isGuess={user.username === "guest"}
         />
       </div>
     </>
