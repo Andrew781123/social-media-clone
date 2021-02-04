@@ -49,7 +49,7 @@ const PostForm = props => {
         <button
           className={`post-submit ${isGuess && "disabled"}`}
           type='submit'
-          disabled={"disabled"}
+          disabled={isGuess && "disabled"}
         >
           Post
         </button>
